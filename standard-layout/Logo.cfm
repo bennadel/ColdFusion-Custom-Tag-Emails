@@ -13,13 +13,13 @@
 			<cfset logoClass = "c-#createUniqueId()#" />
 
 			<core:Styles variable="containerStyle">
+				background-color: ##222222 ;
 				padding: 26px 0px 40px 0px ;
 			</core:Styles>
 			<core:Styles variable="logoStyle">
-				color: ##22252b ;
+				color: ##fefefe ;
 				font-family: serif ;
 				font-size: 40px ;
-				font-style: italic ;
 				font-weight: bold ;
 				line-height: 40px ;
 				text-decoration: none ;
@@ -41,10 +41,10 @@
 
 			<table cellpadding="0" cellspacing="0">
 			<tr>
-				<td style="#containerStyle#" class="#containerClass#">
+				<td class="#containerClass#" style="#containerStyle#">
 
-					<a href="https://www.invisionapp.com" style="#logoStyle#" class="#logoClass#">
-						in
+					<a href="https://www.bennadel.com" class="#logoClass#" style="#logoStyle#">
+						bn
 					</a>
 
 				</td>

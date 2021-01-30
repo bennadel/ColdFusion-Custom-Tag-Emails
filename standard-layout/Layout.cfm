@@ -20,21 +20,24 @@
 			</core:Styles>
 			<core:Styles variable="topBorderStyle">
 				font-size: 1px ;
-				line-height: 2px ;
 				height: 2px ;
+				line-height: 2px ;
 			</core:Styles>
 			<core:Styles variable="contentStyle">
-				color: ##22252b ;
+				color: #getBaseTagData( "cf_email" ).coreColor# ;
 				font-family: #getBaseTagData( "cf_email" ).coreCopyFont# ;
-				font-size: 16px ;
-				line-height: 1.4 ;
-				padding: 20px 0px 30px 0px ;
+				font-size: #getBaseTagData( "cf_email" ).coreFontSize# ;
+				font-weight: #getBaseTagData( "cf_email" ).coreFontWeight# ;
+				line-height: 1.45 ;
+				padding: 45px 0px 30px 0px ;
 			</core:Styles>
 			<core:Styles variable="footerStyle">
 				border-top: 1px solid ##ebecee ;
 				color: ##6c7689 ;
+				font-family: #getBaseTagData( "cf_email" ).coreCopyFont# ;
 				font-size: 12px ;
-				line-height: 17px ;
+				font-weight: #getBaseTagData( "cf_email" ).coreFontWeight# ;
+				line-height: 1.41 ;
 				padding: 20px 0px 20px 0px ;
 			</core:Styles>
 			<core:Styles variable="footerLinkStyle">
@@ -53,12 +56,21 @@
 					}
 
 				}
+
+				@media only screen and ( max-width: 549px ) {
+
+					.#contentClass# {
+						font-size: 16px !important ;
+					}
+
+				}
 			</core:ResponsiveStyles>
 
-			<table width="650" align="center" cellpadding="0" cellspacing="0" style="#tableStyle#" class="#tableClass#">
+			<table width="650" align="center" cellpadding="0" cellspacing="0" class="#tableClass#" style="#tableStyle#">
 			<tbody>
 				<tr>
-					<td colspan="3" style="#topBorderStyle#" bgcolor="##ff3366">
+					<!--- NOTE: "bgcolor" is needed for Lotus Notes. --->
+					<td colspan="3" bgcolor="##ff3366" style="#topBorderStyle#">
 						<br />
 					</td>
 				</tr>
@@ -66,9 +78,7 @@
 					<td width="60" class="#gutterClass#">
 						<!--- Left margin. ---><br />
 					</td>
-					<td style="#contentStyle#" class="#contentClass#">
-
-						<standard:Logo />
+					<td class="#contentClass#" style="#contentStyle#">
 
 		</cfoutput>
 	</cfcase>
@@ -81,17 +91,17 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3" align="center" style="#footerStyle#" bgcolor="##f8f8fa">
+					<td colspan="3" align="center" bgcolor="##f8f8fa" style="#footerStyle#">
 
 						Questions?
-						<a href="##" style="#footerLinkStyle#">We're here to help.</a>
+						<a href="https://www.bennadel.com" target="_blank" style="#footerLinkStyle#">I'm here to help.</a>
 
 					</td>
 				</tr>
 			</tbody>
 			</table>
 
-			<core:Footer />
+			<standard:Footer />
 
 		</cfoutput>
 	</cfcase>

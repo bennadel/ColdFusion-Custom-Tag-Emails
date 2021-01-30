@@ -1,9 +1,6 @@
 
 <!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="../core/" />
-
-<!--- Define custom tag attributes. --->
-<cfparam name="attributes.href" type="string" />
+<cfimport prefix="core" taglib="../" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -13,18 +10,21 @@
 		<cfoutput>
 
 			<core:Styles variable="style">
-				color: ##ff3366 ;
-				text-decoration: none ;
+				font-size: 100% ;
+				line-height: 1.45 ;
+				margin-bottom: 3px ;
+				margin-top: 3px ;
+				mso-line-height-rule: exactly ; <!--- For outlook. --->
 			</core:Styles>
 
-			<a style="#style#" href="#attributes.href#">
+			<li style="#style#">
 
 		</cfoutput>
 	</cfcase>
 	<cfcase value="end">
 		<cfoutput>
 
-			</a>
+			</li>
 
 		</cfoutput>
 	</cfcase>

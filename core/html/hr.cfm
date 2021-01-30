@@ -1,9 +1,9 @@
 
 <!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
+<cfimport prefix="core" taglib="../" />
 
 <!--- Define custom tag attributes. --->
-<cfparam name="attributes.teaser" type="string" default="" />
+<cfparam name="attributes.margin" type="string" default="small normal" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -12,24 +12,23 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<cfif ! attributes.teaser.len()>
-
-				<cfexit method="exitTag" />
-
-			</cfif>
-
 			<core:Styles variable="style">
-				color: #getBaseTagData( "cf_email" ).coreBackgroundColor# ;
+				border-top: 1px solid ##cccccc ;
 				font-size: 1px ;
 				line-height: 1px ;
+				Margin: 0 ; <!--- For outlook. --->
+				margin: 0px ;
 				mso-line-height-rule: exactly ;
-				opacity: 0 ;
-				visibility: hidden ;
+				padding: 0px ;
 			</core:Styles>
 
+			<core:Margin size="#attributes.margin.listFirst( ' ' )#" />
+
 			<div style="#style#">
-				#encodeForHtml( attributes.teaser )#
+				<br />
 			</div>
+
+			<core:Margin size="#attributes.margin.listLast( ' ' )#" />
 
 			<!--- Make sure this tag has NO BODY. --->
 			<cfexit method="exitTag" />

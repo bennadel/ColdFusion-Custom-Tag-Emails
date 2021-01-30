@@ -1,6 +1,6 @@
 
 <!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
+<cfimport prefix="core" taglib="../core/" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -37,11 +37,11 @@
 					<td style="#containerStyle#">
 
 						<h3 style="#titleStyle#">
-							Powered by InVision
+							Powered by Lucee CFML
 						</h3>
 
 						<h4 style="#subtitleStyle#">
-							The Digital Product Design Platform
+							The leading open-source CFML application server/engine
 						</h4>
 
 					</td>

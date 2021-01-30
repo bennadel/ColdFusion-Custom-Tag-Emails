@@ -3,7 +3,8 @@
 <cfimport prefix="core" taglib="./" />
 
 <!--- Define custom tag attributes. --->
-<cfparam name="attributes.teaser" type="string" default="" />
+<cfparam name="attributes.src" type="string" />
+<cfparam name="attributes.alt" type="string" default="This pixel helps us understand our customer's consumption of email content." />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -12,24 +13,27 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<cfif ! attributes.teaser.len()>
-
-				<cfexit method="exitTag" />
-
-			</cfif>
-
-			<core:Styles variable="style">
-				color: #getBaseTagData( "cf_email" ).coreBackgroundColor# ;
+			<core:Styles variable="wrapperStyle">
 				font-size: 1px ;
+				height: 1px ;
 				line-height: 1px ;
 				mso-line-height-rule: exactly ;
-				opacity: 0 ;
-				visibility: hidden ;
+				overflow: hidden ;
+			</core:Styles>
+			<core:Styles variable="imageStyle">
+				height: 1px ;
+				width: 1px ;
 			</core:Styles>
 
-			<div style="#style#">
-				#encodeForHtml( attributes.teaser )#
-			</div>
+			<p aria-hidden="true" style="#wrapperStyle#">
+				<img
+					src="#encodeForHtmlAttribute( attributes.src )#"
+					width="1"
+					height="1"
+					alt="#encodeForHtmlAttribute( attributes.alt )#"
+					style="#imageStyle#"
+				/>
+			</p>
 
 			<!--- Make sure this tag has NO BODY. --->
 			<cfexit method="exitTag" />

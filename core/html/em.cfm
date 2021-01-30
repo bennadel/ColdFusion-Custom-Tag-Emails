@@ -1,13 +1,17 @@
 
 <cfswitch expression="#thistag.executionMode#">
 	<cfcase value="start">
+		<cfoutput>
 
-		<p>
+			<em>
 
+		</cfoutput>
 	</cfcase>
 	<cfcase value="end">
+		<cfoutput>
 
-		</p>
-		
+			</em>
+
+		</cfoutput>	
 	</cfcase>
 </cfswitch>
