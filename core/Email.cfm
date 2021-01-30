@@ -71,14 +71,18 @@
 							mso-table-rspace: 0pt !important ;
 						}
 
-						<!--- Use a better rendering method when resizing images in Outlook IE. --->
+						<!---
+							Use a better rendering method when resizing images in
+							Outlook IE.
+						--->
 						img {
 							-ms-interpolation-mode: bicubic ;
 						}
 
 						<!---
 							Prevent Windows 10 Mail from underlining links. Styles for
-							underlined links should be inline. --->
+							underlined links should be inline.
+						--->
 						a {
 							text-decoration: none ;
 						}
@@ -98,7 +102,7 @@
 					<!--- This is for Outlook. --->
 					<!--[if mso]>
 					<style type="text/css">
-						body, table, td, a, h2, h3, h4, h5, p {
+						body, table, td, a, h1, h2, h3, h4, h5, p {
 							font-family: Arial, Helvetica, sans-serif !important ;
 						}
 					</style>

@@ -17,10 +17,9 @@
 				color: #getBaseTagData( "cf_email" ).coreLinkColor# ;
 
 				<cfif attributes.decoration>
-					border-bottom: 1px solid ##ff3366 ;
-					text-decoration: none;
+					text-decoration: underline ;
 				<cfelse>
-					text-decoration: none;
+					text-decoration: none ;
 				</cfif>
 			</core:Styles>
 
