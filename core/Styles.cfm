@@ -18,7 +18,9 @@
 
 <cfscript>
 	
-	public string function serializeProperties( required string content ) {
+	public string function serializeProperties( required string content )
+		cachedWithin = "request"
+		{
 
 		var newline = chr( 10 );
 

@@ -22,8 +22,11 @@
 				color: #getBaseTagData( "cf_email" ).coreBackgroundColor# ;
 				font-size: 1px ;
 				line-height: 1px ;
+				max-height: 0px ;
+				max-width: 0px ;
 				mso-line-height-rule: exactly ;
 				opacity: 0 ;
+				overflow: hidden ;
 				visibility: hidden ;
 			</core:Styles>
 
