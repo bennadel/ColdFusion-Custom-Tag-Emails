@@ -3,7 +3,9 @@
 <cfimport prefix="core" taglib="../" />
 
 <!--- Define custom tag attributes. --->
-<cfparam name="attributes.margin" type="string" default="small normal" />
+<cfparam name="attributes.class" type="string" default="" />
+<cfparam name="attributes.margins" type="string" default="small normal" />
+<cfparam name="attributes.style" type="string" default="" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -12,23 +14,27 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<core:Styles variable="style">
+			<core:Styles
+				variable="inlineStyle"
+				entityName="hr"
+				entityClass="#attributes.class#"
+				entityStyle="#attributes.style#">
 				border-top: 1px solid ##cccccc ;
 				font-size: 1px ;
-				line-height: 1px ;
-				Margin: 0 ; <!--- For outlook. --->
+				line-height: 0% ;
+				Margin: 0 ; <!--- For Outlook. --->
 				margin: 0px ;
 				mso-line-height-rule: exactly ;
 				padding: 0px ;
 			</core:Styles>
 
-			<core:Margin size="#attributes.margin.listFirst( ' ' )#" />
+			<core:BlockMargins margins="#attributes.margins#">
 
-			<div style="#style#">
-				<br />
-			</div>
+				<div class="#trim( 'html-entity-hr #attributes.class#' )#" style="#inlineStyle#">
+					<br />
+				</div>
 
-			<core:Margin size="#attributes.margin.listLast( ' ' )#" />
+			</core:BlockMargins>
 
 			<!--- Make sure this tag has NO BODY. --->
 			<cfexit method="exitTag" />

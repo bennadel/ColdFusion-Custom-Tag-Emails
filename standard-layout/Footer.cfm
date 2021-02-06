@@ -9,13 +9,15 @@
 	<cfcase value="end">
 		<cfoutput>
 
+			<cfset theme = getBaseTagData( "cf_email" ).theme />
+
 			<core:Styles variable="containerStyle">
 				padding: 25px 0px 30px 0px ;
 				text-align: center ;
 			</core:Styles>
 			<core:Styles variable="titleStyle">
 				color: ##313745 ;
-				font-family: #getBaseTagData( "cf_email" ).coreTitleFont# ;
+				font-family: #theme.fonts.baseFontFamily# ;
 				font-size: 12px ;
 				letter-spacing: 0.5px ;
 				line-height: 17px ;
@@ -24,14 +26,14 @@
 			</core:Styles>
 			<core:Styles variable="subtitleStyle">
 				color: ##6c7689 ;
-				font-family: #getBaseTagData( "cf_email" ).coreCopyFont# ;
+				font-family: #theme.fonts.baseFontFamily# ;
 				font-size: 12px ;
 				font-weight: lighter ;
 				line-height: 17px ;
 				margin: 0px 0px 0px 0px ;
 			</core:Styles>
 
-			<table align="center" cellpadding="0" cellspacing="0">
+			<table align="center" cellpadding="0" cellspacing="0" role="presentation">
 			<tbody>
 				<tr>
 					<td style="#containerStyle#">

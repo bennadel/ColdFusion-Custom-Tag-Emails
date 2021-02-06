@@ -12,56 +12,65 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<cfswitch expression="#attributes.size#">
-				<cfcase value="none">
+			<cfif ( attributes.size eq "none" )>
+				
+				<cfexit method="exitTag" />
 
-					<cfexit method="exitTag" />
+			</cfif>
 
-				</cfcase>
-				<cfcase value="xsmall">
+			<cfset sizes = {
+				xxxsmall: "2px",
+				xxsmall: "6px",
+				xsmall: "8px",
+				small: "12px",
+				normal: "16px",
+				large: "20px",
+				xlarge: "22px",
+				xxlarge: "28px",
+				xxxlarge: "32px"
+			} />
 
-					<cfset lineHeight = "0.2" />
+			<cfif ! sizes.keyExists( attributes.size )>
 
-				</cfcase>
-				<cfcase value="small">
+				<cfthrow
+					type="InvalidMarginSize"
+					message="Core:Margin invalid margin size"
+					detail="Margin: #attributes.size#"
+				/>
 
-					<cfset lineHeight = "0.5" />
+			</cfif>
 
-				</cfcase>
-				<cfcase value="normal">
-
-					<cfset lineHeight = "1.2" />
-
-				</cfcase>
-				<cfcase value="large">
-
-					<cfset lineHeight = "1.5" />
-
-				</cfcase>
-				<cfcase value="xlarge">
-
-					<cfset lineHeight = "2.5" />
-
-				</cfcase>
-				<cfdefaultcase>
-
-					<cfthrow
-						type="InvalidMarginSize"
-						message="Core:Margin invalid margin size"
-						detail="Margin: #attributes.size#"
-					/>
-
-				</cfdefaultcase>
-			</cfswitch>
-
-			<core:Styles variable="style">
-				line-height: #lineHeight# ;
-				mso-line-height-rule: exactly ;
+			<core:Styles variable="tableStyle">
+				height: #sizes[ attributes.size ]# ;
+				Margin: 0 ; <!--- For Outlook. --->
+				margin: 0px ;
+			</core:Styles>
+			<core:Styles variable="tdStyle">
+				font-family: arial, verdana, helvetica, sans-serif ;
+				font-size: #sizes[ attributes.size ]# ;
+				height: #sizes[ attributes.size ]# ;
+				line-height: 70% ; <!--- Using a smaller line-height for Outlook. --->
+				mso-line-height-rule: exactly ; <!--- For Outlook. --->
+				overflow: hidden ;
+			</core:Styles>
+			<core:Styles variable="divStyle">
+				height: #sizes[ attributes.size ]# ;
+				overflow: hidden ;
 			</core:Styles>
 
-			<div style="#style#">
-				<br />
-			</div>
+			<table aria-hidden="true" role="presentation" border="0" cellpadding="0" cellspacing="0" style="#tableStyle#">
+			<tr>
+				<td style="#tdStyle#">
+					<!---
+						I find that using height on the Table/TD alone doesn't work
+						consistently in AOL. But, wrapping a Div seems to help.
+					--->
+					<div style="#divStyle#">
+						&nbsp;<br />
+					</div>
+				</td>
+			</tr>
+			</table>
 
 			<!--- Make sure this tag has NO BODY. --->
 			<cfexit method="exitTag" />

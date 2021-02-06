@@ -18,8 +18,10 @@
 
 			</cfif>
 
+			<cfset theme = getBaseTagData( "cf_email" ).theme />
+
 			<core:Styles variable="style">
-				color: #getBaseTagData( "cf_email" ).coreBackgroundColor# ;
+				color: #theme.colors.background# ;
 				font-size: 1px ;
 				line-height: 1px ;
 				max-height: 0px ;

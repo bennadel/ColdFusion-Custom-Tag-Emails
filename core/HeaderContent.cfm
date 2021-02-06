@@ -3,7 +3,7 @@
 	<cfcase value="end">
 
 		<cfset getBaseTagData( "cf_email" )
-			.responsiveStyleBlocks
+			.headerContentBlocks
 			.append( thistag.generatedContent )
 		/>
 

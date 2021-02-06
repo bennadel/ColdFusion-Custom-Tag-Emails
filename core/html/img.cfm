@@ -9,31 +9,45 @@
 <cfimport prefix="core" taglib="../" />
 
 <!--- Define custom tag attributes. --->
+<cfparam name="attributes.alt" type="string" default="" />
 <cfparam name="attributes.class" type="string" default="" />
+<cfparam name="attributes.height" type="string" default="" />
+<cfparam name="attributes.src" type="string" />
 <cfparam name="attributes.style" type="string" default="" />
+<cfparam name="attributes.width" type="string" default="" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
 
 <cfswitch expression="#thistag.executionMode#">
-	<cfcase value="end">
+	<cfcase value="start">
 		<cfoutput>
 
 			<core:Styles
 				variable="inlineStyle"
-				entityName="strong"
+				entityName="img"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-				<!--- NOTE: Explicit font-weight needed for Lotus Notes. --->
-				font-weight: 800 ;
+				border: none ;
 			</core:Styles>
 
-			<strong class="#trim( 'html-entity-strong #attributes.class#' )#" style="#inlineStyle#">#thistag.generatedContent#</strong>
+			<img
+				src="#encodeForHtmlAttribute( attributes.src )#"
+				alt="#encodeForHtmlAttribute( attributes.alt )#"
+				<cfif attributes.width.len()>
+					width="#encodeForHtmlAttribute( attributes.width )#"
+				</cfif>
+				<cfif attributes.height.len()>
+					height="#encodeForHtmlAttribute( attributes.height )#"
+				</cfif>
+				class="#trim( 'html-entity-img #attributes.class#' )#"
+				style="#inlineStyle#"
+			/>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />
 
-		</cfoutput>	
+		</cfoutput>
 	</cfcase>
 </cfswitch>
 

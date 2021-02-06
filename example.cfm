@@ -8,14 +8,13 @@
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
 
-<core:email
+<core:Email
 	subject="Ben Nadel has met some amazing people!"
 	teaser="See them for yourself!">
+	<core:Body>
 
-	<standard:Layout>
-
-		<html:h1 margin="none xlarge">
-			Ben Nadel has met some truly
+		<html:h1 margin="none large">
+			<core:NoWrapText>Ben Nadel</core:NoWrapText> has met some truly
 			<html:a href="https://www.bennadel.com/people" decoration="false">
 				amazing people
 			</html:a>
@@ -208,11 +207,7 @@
 			</html:li>
 		</html:ol>
 
-	</standard:Layout>
-
+	</core:Body>
 	<core:TrackingPixel src="https://www.bennadel.com/tracking/pixel?foo=bar" />
-
-</core:email>
-
-
+</core:Email>
 

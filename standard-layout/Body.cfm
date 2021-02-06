@@ -10,6 +10,11 @@
 	<cfcase value="start">
 		<cfoutput>
 
+			<cfset theme = getBaseTagData( "cf_email" ).theme />
+			<cfset theme.importUrls.append( "https://fonts.googleapis.com/css?family=Poppins:100,200,300,500|Roboto:100,200,300,400,500,600,700" ) />
+			<cfset theme.fonts.titleFontFamily = "Poppins, BlinkMacSystemFont, Helvetica, Arial, sans-serif" />
+			<cfset theme.fonts.baseFontFamily = "Roboto, BlinkMacSystemFont, Helvetica, Arial, sans-serif" />
+
 			<cfset tableClass = "c-#createUniqueId()#" />
 			<cfset contentClass = "c-#createUniqueId()#" />
 			<cfset gutterClass = "c-#createUniqueId()#" />
@@ -24,19 +29,19 @@
 				line-height: 2px ;
 			</core:Styles>
 			<core:Styles variable="contentStyle">
-				color: #getBaseTagData( "cf_email" ).coreColor# ;
-				font-family: #getBaseTagData( "cf_email" ).coreCopyFont# ;
-				font-size: #getBaseTagData( "cf_email" ).coreFontSize# ;
-				font-weight: #getBaseTagData( "cf_email" ).coreFontWeight# ;
-				line-height: 1.45 ;
+				color: #theme.colors.onSurface# ;
+				font-family: #theme.fonts.baseFontFamily# ;
+				font-size: #theme.fonts.baseFontSize# ;
+				font-weight: #theme.fonts.baseFontWeight# ;
+				line-height: 1.45em ;
 				padding: 45px 0px 30px 0px ;
 			</core:Styles>
 			<core:Styles variable="footerStyle">
 				border-top: 1px solid ##ebecee ;
 				color: ##6c7689 ;
-				font-family: #getBaseTagData( "cf_email" ).coreCopyFont# ;
+				font-family: #theme.fonts.baseFontFamily# ;
 				font-size: 12px ;
-				font-weight: #getBaseTagData( "cf_email" ).coreFontWeight# ;
+				font-weight: #theme.fonts.baseFontWeight# ;
 				line-height: 1.41 ;
 				padding: 20px 0px 20px 0px ;
 			</core:Styles>
@@ -44,7 +49,7 @@
 				color: ##276ee5 ;
 				text-decoration: none ;
 			</core:Styles>
-			<core:ResponsiveStyles>
+			<core:HeaderStyles>
 				@media only screen and ( max-width: 650px ) {
 
 					.#tableClass# {
@@ -64,9 +69,9 @@
 					}
 
 				}
-			</core:ResponsiveStyles>
+			</core:HeaderStyles>
 
-			<table width="650" align="center" cellpadding="0" cellspacing="0" class="#tableClass#" style="#tableStyle#">
+			<table width="650" align="center" cellpadding="0" cellspacing="0" class="#tableClass#" style="#tableStyle#" role="presentation">
 			<tbody>
 				<tr>
 					<!--- NOTE: "bgcolor" is needed for Lotus Notes. --->

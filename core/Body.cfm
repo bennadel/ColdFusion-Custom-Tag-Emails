@@ -8,23 +8,16 @@
 <cfswitch expression="#thistag.executionMode#">
 	<cfcase value="start">
 
-		<core:HtmlEntityTheme entity="h1">
-			font-size: 40px ;
-		</core:HtmlEntityTheme>
-
 		<core:HtmlEntityTheme entity="a">
 			color: green ;
 			text-decoration: underline ;
 		</core:HtmlEntityTheme>
-		
 
 	</cfcase>
 	<cfcase value="end">
 		<cfoutput>
 
 			<cfset theme = getBaseTagData( "cf_email" ).theme />
-
-			
 
 			<core:Styles variable="bodyContentStyle">
 				color: #theme.colors.onSurface# ;

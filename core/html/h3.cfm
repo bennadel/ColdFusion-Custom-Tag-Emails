@@ -3,38 +3,44 @@
 <cfimport prefix="core" taglib="../" />
 
 <!--- Define custom tag attributes. --->
-<cfparam name="attributes.margin" type="string" default="normal small" />
+<cfparam name="attributes.class" type="string" default="" />
+<cfparam name="attributes.margins" type="string" default="normal xsmall" />
+<cfparam name="attributes.style" type="string" default="" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
 
 <cfswitch expression="#thistag.executionMode#">
-	<cfcase value="start">
+	<cfcase value="end">
 		<cfoutput>
 
-			<core:Styles variable="style">
-				font-family: #getBaseTagData( "cf_email" ).coreTitleFont# ;
-				font-size: 120% ;
-				font-weight: #getBaseTagData( "cf_email" ).coreTitleFontWeight# ;
-				line-height: 1.35 ;
-				Margin: 0 ; <!--- For outlook. --->
+			<cfset theme = getBaseTagData( "cf_email" ).theme />
+
+			<core:Styles
+				variable="inlineStyle"
+				entityName="h3"
+				entityClass="#attributes.class#"
+				entityStyle="#attributes.style#">
+				font-family: #theme.fonts.h3.family# ;
+				font-size: #theme.fonts.h3.size# ;
+				font-weight: #theme.fonts.h3.weight# ;
+				line-height: #theme.fonts.h3.lineHeight# ;
+				Margin: 0 ; <!--- For Outlook. --->
 				margin: 0px ;
 				mso-line-height-rule: exactly ; <!--- For outlook. --->
 				padding: 0px ;
 			</core:Styles>
 
-			<core:Margin size="#attributes.margin.listFirst( ' ' )#" />
+			<core:BlockMargins margins="#attributes.margins#">
 
-			<h3 style="#style#">
+				<h3 class="#trim( 'html-entity-h3 #attributes.class#' )#" style="#inlineStyle#">
+					#thistag.generatedContent#
+				</h3>
 
-		</cfoutput>
-	</cfcase>
-	<cfcase value="end">
-		<cfoutput>
+			</core:BlockMargins>
 
-			</h3>
-
-			<core:Margin size="#attributes.margin.listLast( ' ' )#" />
+			<!--- Reset the generated content since we're overriding the output. --->
+			<cfset thistag.generatedContent = "" />
 
 		</cfoutput>
 	</cfcase>
