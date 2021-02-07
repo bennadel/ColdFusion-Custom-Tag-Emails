@@ -1,0 +1,53 @@
+
+From Cait Mass:
+===============
+Hi Ben! Good morning! Thanks for reaching out - The top email clients I would focus on would be the following:
+
+* Gmail (Desktop, Gmail App for Mobile, Web )
+* Apple Mail (regular + Dark mode on Desktop, iPhone 8 and above for Mobile and iPad retina + Pro)
+* Outlook 2013, 2016 and 2019 (Desktop, Mobile, Web)
+* Windows 10 (Desktop)
+===============
+
+
+
+* Core mobile breakpoint of 650px in theme
+* Stick to one mobile breakpoint for now.
+
+
+
+* Set breakpoint that other elements can check.
+
+* MSO | IE uses tables, others using inline-block with width/max-width %.
+
+* Responsive content class hook? 
+
+* Where does theming live?
+
+* Ability to define "unique" ResponsiveStyles block (only injects once)?
+
+* Sections / Columns like MJML
+
+* aria-hidden="true" on spacer elements.
+	- Elements might should probably be TDs with "height" and "Style" for the best support.
+
+* bgcolor on td is the safest way to create background colors.
+
+* Use font-size / color / etc for IMG tags to style ALT text.
+
+* SEt "font-size: 0" on ghost-table wrapper so that the inline-block elements don't have gaps.
+
+* font-size:1rem; font-size:max(1rem, 16px) ... on responsive content???
+
+* https://mjml.io/
+* https://stackoverflow.design/email/guidelines/getting-started/
+* https://www.litmus.com/blog/what-email-marketers-need-to-know-about-ios-11-and-the-new-iphones/
+* https://templates.mailchimp.com/
+* https://medium.com/tealmedia/creating-bulletproof-html-emails-e0e4866c3f8
+* https://www.campaignmonitor.com/css/
+* https://www.campaignmonitor.com/dev-resources/guides/mobile/
+* https://webdesign.tutsplus.com/tutorials/creating-a-future-proof-responsive-email-without-media-queries--cms-23919
+* https://www.goodemailcode.com/email-code/template
+* https://stripo.email/blog/best-fonts-email-usage-tips-tricks/
+* https://support.gainsight.com/SFDC_Edition/Journey_Orchestrator_and_Email_Templates/Email_Options_and_Guidelines/Email_Template_Best_Practices
+* https://www.intercom.com/help/en/articles/245-a-guide-to-creating-html-emails
