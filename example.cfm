@@ -2,8 +2,8 @@
 <!--- Import custom tag libraries. --->
 <cfimport prefix="core" taglib="./core/" />
 <cfimport prefix="html" taglib="./core/html/" />
-<cfimport prefix="imageGrid" taglib="./standard-layout/image-grid/" />
-<cfimport prefix="standard" taglib="./standard-layout/" />
+<cfimport prefix="imageGrid" taglib="./customized/image-grid/" />
+<cfimport prefix="customized" taglib="./customized/" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -13,7 +13,7 @@
 	teaser="See them for yourself!">
 	<core:Body>
 
-		<html:h1 margin="none large">
+		<html:h1 margins="none large">
 			<core:NoWrapText>Ben Nadel</core:NoWrapText> has met some truly
 			<html:a href="https://www.bennadel.com/people" decoration="false">
 				amazing people
@@ -58,11 +58,11 @@
 			Oh the memories! To see more wonderful people, check out my People section.
 		</html:p>
 
-		<standard:CallToAction href="https://www.bennadel.com/people" margin="large large">
+		<customized:CallToAction href="https://www.bennadel.com/people" margins="large large">
 			See More People
-		</standard:CallToAction>
+		</customized:CallToAction>
 
-		<html:hr margin="large xlarge" />
+		<html:hr margins="large xlarge" />
 
 		<html:p>
 			The following is just a bunch of random style stuff to experiment with and
@@ -137,7 +137,7 @@
 		</html:p>
 
 		<html:blockquote>
-			<html:p margin="none">
+			<html:p margins="none">
 				I've seen things you people wouldn't believe. Attack ships on fire off
 				the shoulder of Orion. I watched C-beams glitter in the dark near the
 				Tannhauser Gate. All those moments will be lost in time, like tears
@@ -152,7 +152,7 @@
 		</html:p>
 
 		<html:blockquote>
-			<html:p margin="none">
+			<html:p margins="none">
 				I don't know why he saved my life. Maybe in those last moments he loved
 				life more than he ever had before. Not just his life - anybody's life;
 				my life. All he'd wanted were the same answers the rest of us want.
@@ -208,6 +208,5 @@
 		</html:ol>
 
 	</core:Body>
-	<core:TrackingPixel src="https://www.bennadel.com/tracking/pixel?foo=bar" />
+	<core:TrackingPixel src="https://img.spacergif.org/v1/spacer.gif" />
 </core:Email>
-

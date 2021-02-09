@@ -6,6 +6,7 @@
 <cfparam name="attributes.class" type="string" default="" />
 <cfparam name="attributes.margins" type="string" default="none normal" />
 <cfparam name="attributes.style" type="string" default="" />
+<cfparam name="attributes.type" type="string" default="1" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -19,15 +20,14 @@
 				entityName="ol"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-				Margin-bottom: 0 ; <!--- For Outlook. --->
-				margin-bottom: 0px ;
-				Margin-top: 0 ; <!--- For Outlook. --->
-				margin-top: 0px ;
 			</core:Styles>
 
 			<core:BlockMargins margins="#attributes.margins#">
 
-				<ol class="#trim( 'html-entity-ol #attributes.class#' )#" style="#inlineStyle#">
+				<ol
+					type="#attributes.type#"
+					class="#trim( 'html-entity-ol #attributes.class#' )#"
+					style="#inlineStyle#">
 					#thistag.generatedContent#
 				</ol>
 

@@ -14,26 +14,18 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<cfset theme = getBaseTagData( "cf_email" ).theme />
-
 			<core:Styles
 				variable="inlineStyle"
 				entityName="h3"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-				font-family: #theme.fonts.h3.family# ;
-				font-size: #theme.fonts.h3.size# ;
-				font-weight: #theme.fonts.h3.weight# ;
-				line-height: #theme.fonts.h3.lineHeight# ;
-				Margin: 0 ; <!--- For Outlook. --->
-				margin: 0px ;
-				mso-line-height-rule: exactly ; <!--- For outlook. --->
-				padding: 0px ;
 			</core:Styles>
 
 			<core:BlockMargins margins="#attributes.margins#">
 
-				<h3 class="#trim( 'html-entity-h3 #attributes.class#' )#" style="#inlineStyle#">
+				<h3
+					class="#trim( 'html-entity-h3 #attributes.class#' )#"
+					style="#inlineStyle#">
 					#thistag.generatedContent#
 				</h3>
 

@@ -11,19 +11,40 @@
 		case "end":
 
 			parentTag = getBaseTagData( getParentTagName( getBaseTagList() ) );
-			themeVariableName = "$$internal:styles:#attributes.entity#";
 
-			if ( attributes.class.len() ) {
+			loop
+				value = "entityName"
+				list = attributes.entity
+				delimiters = ", "
+				{
 
-				for ( className in splitClassNames( attributes.class ) ) {
+				themeVariableName = "$$entity:theme:#entityName#";
 
-					parentTag[ "#themeVariableName#.#className#" ] = thistag.generatedContent;
+				if ( len( attributes.class ) ) {
+
+					for ( className in splitClassNames( attributes.class ) ) {
+
+						classVariableName = "#themeVariableName#.#className#";
+
+						prefixContent = parentTag.keyExists( classVariableName )
+							? ( ";" & parentTag[ classVariableName ] )
+							: ""
+						;
+
+						parentTag[ classVariableName ] = ( prefixContent & thistag.generatedContent );
+
+					}
+
+				} else {
+
+					prefixContent = parentTag.keyExists( themeVariableName )
+						? ( ";" & parentTag[ themeVariableName ] )
+						: ""
+					;
+
+					parentTag[ themeVariableName ] = ( prefixContent & thistag.generatedContent );
 
 				}
-
-			} else {
-
-				parentTag[ themeVariableName ] = thistag.generatedContent;
 
 			}
 
@@ -46,7 +67,7 @@
 		{
 
 		// The 1st tag is the current tag. We have to go above it.
-		return( tagList.listGetAt( 2 ) );
+		return( arguments.tagList.listGetAt( 2 ) );
 
 	}
 
@@ -61,7 +82,7 @@
 		cachedWithin = "request"
 		{
 
-		return( value.reMatch( "\S+" ) );
+		return( arguments.value.reMatch( "\S+" ) );
 
 	}
 

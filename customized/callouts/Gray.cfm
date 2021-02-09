@@ -1,6 +1,7 @@
 
 <!--- Import custom tag libraries. --->
 <cfimport prefix="core" taglib="../../core/" />
+<cfimport prefix="html" taglib="../../core/html/" />
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.class" type="string" default="" />
@@ -14,22 +15,19 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<cfset theme = getBaseTagData( "cf_email" ).theme />
-
-			<!--- Theme styles. --->
-			<core:HtmlEntityTheme entity="h2">
-				font-size: 18px ;
-				font-weight: 800 ;
-				line-height: 23px ;
+			<!---
+				Entity theming has to happen in the START execution mode so that it can
+				be applied to the child elements of the tag.
+			--->
+			<core:HtmlEntityTheme entity="h3">
 				text-align: center ;
 			</core:HtmlEntityTheme>
 			<core:HtmlEntityTheme entity="p">
-				font-size: 16px ;
-				font-weight: 100 ;
-				line-height: 21px ;
+				font-size: 13px ;
+				line-height: 18px ;
 			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="a">
-				color: #theme.colors.onSurface# ;
+			<core:HtmlEntityTheme entity="p" class="special">
+				color: deeppink ;
 			</core:HtmlEntityTheme>
 
 		</cfoutput>
@@ -37,21 +35,17 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<cfset tableClass = "standard-gray-callout" />
-			<cfset tdClass = "#tableClass#__content" />
+			<cfset theme = getBaseTagData( "cf_email" ).theme />
 
 			<core:Styles
 				variable="inlineStyle"
 				entityStyle="#attributes.style#">
+				background-color: ##f0f0f0 ;
 				padding: 20px 30px 20px 30px ;
 			</core:Styles>
-			<core:HeaderStyles runonce="true">
-				.#tdClass# a:hover {
-					color: #theme.colors.link# !important ;
-				}
-
+			<core:HeaderStyles>
 				@media only screen and ( max-width: #theme.width#px ) {
-					.#tdClass# {
+					.standard-gray-callout__content {
 						padding: 10px 10px 10px 10px !important ;
 					}
 				}
@@ -59,13 +53,15 @@
 
 			<core:BlockMargins margins="#attributes.margins#">
 
-				<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" class="#tableClass#">
-				<tr>
-					<td bgcolor="##f0f0f0" class="#trim( '#tdClass# #attributes.class#' )#" style="#inlineStyle#">
+				<html:table width="100%" class="standard-gray-callout">
+				<html:tr>
+					<html:td bgcolor="##f0f0f0" class="#trim( 'standard-gray-callout__content #attributes.class#' )#" style="#inlineStyle#">
+
 						#thistag.generatedContent#
-					</td>
-				</tr>
-				</table>
+
+					</html:td>
+				</html:tr>
+				</html:table>
 
 			</core:BlockMargins>
 

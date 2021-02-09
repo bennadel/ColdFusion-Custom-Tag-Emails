@@ -22,8 +22,6 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<cfset theme = getBaseTagData( "cf_email" ).theme />
-
 			<core:Styles
 				variable="inlineStyle"
 				entityName="a"
@@ -36,7 +34,7 @@
 
 			<a
 				href="#encodeForHtmlAttribute( attributes.href )#"
-				target="#encodeForHtmlAttribute( attributes.target )#"
+				target="attributes.target"
 				class="#trim( 'html-entity-a #attributes.class#' )#"
 				style="#inlineStyle#"
 				>#thistag.generatedContent#</a>

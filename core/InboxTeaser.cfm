@@ -18,21 +18,22 @@
 
 			</cfif>
 
-			<cfset theme = getBaseTagData( "cf_email" ).theme />
-
-			<core:Styles variable="style">
-				color: #theme.colors.background# ;
-				font-size: 1px ;
-				line-height: 1px ;
+			<core:Styles variable="inlineStyle">
+				display: none ;
+				font-size: 0px ;
+				height: 0px ;
+				line-height: 0px ;
 				max-height: 0px ;
 				max-width: 0px ;
-				mso-line-height-rule: exactly ;
+				mso-hide: all ;
+				mso-line-height-rule: exactly ; <!--- For Outlook. --->
 				opacity: 0 ;
 				overflow: hidden ;
 				visibility: hidden ;
+				width: 0px ;
 			</core:Styles>
 
-			<div style="#style#">
+			<div aria-hidden="true" style="#inlineStyle#">
 				#encodeForHtml( attributes.teaser )#
 			</div>
 

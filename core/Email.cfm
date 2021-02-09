@@ -12,89 +12,176 @@
 
 <cfswitch expression="#thistag.executionMode#">
 	<cfcase value="start">
+		<cfoutput>
 
-		<core:HtmlEntityTheme entity="a">
-			color: red ;
-			text-decoration: underline ;
-		</core:HtmlEntityTheme>
+			<cfscript>
 
-		<cfscript>
+				// WIP: I'm not really sure what theming looks like yet, from a variable
+				// standpoint. Since I can apply HtmlEntityTheme tags, so I even need to
+				// have variables anymore?
+				theme = {
+					// Color concepts have been borrowed from Material Design.
+					// --
+					// https://material.io/design/color/the-color-system.html#color-theme-creation
+					colors: {
+						// Background colors.
+						primary: "##3f51b5",
+						secondary: "##ff3366",
+						background: "##fefefe",
+						surface: "##fefefe",
+						error: "##b00020",
+
+						// Foreground colors.
+						onPrimary: "##ffffff",
+						onSecondary: "##ffffff",
+						onBackground: "##22252b",
+						onSurface: "##22252b",
+						onError: "##ffffff"
+					},
+					importUrls: [],
+					width: 600
+				};
+
+				headerStyleBlocks = [];
+				headerContentBlocks = [];
+
+			</cfscript>
+
+			<!---
+				These are the DEFAULT THEMES for the HTML ENTITIES. These represent the
+				root styles that will be applied to all entity instances within the
+				email. But, these styles can be overridden at every layer of the Custom
+				Tag DOM (Document Object Model).
+			--->
+
+			<!---
+				First, setup the basic font properties. These are limited to color, font-
+				size, font-family, and line-height.
+				--
+				CAUTION: For emails that load a custom font URL, Outlook will not be
+				happy. As such, those emails should define a forceful fallback to web-
+				safe fonts for MSO clients. Something like:
+
+				<core:HeaderContent>
+					<core:IfMso>
+						<style type="text/css">
+							h1, h2, h3, h4, h5, th {
+								font-family: garamond, georgia, serif !important ;
+							}
+							blockquote, body, img, li, p, td {
+								font-family: helvetica, arial, sans-serif !important ;
+							}
+						</style>
+					</core:IfMso>
+				</core:HeaderContent>
+			--->
+			<core:HtmlEntityTheme entity="h1, h2, h3, h4, h5, th">
+				color: #theme.colors.onSurface# ;
+				font-family: garamond, georgia, serif ;
+				font-weight: 800 ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="h1">
+				font-size: 32px ;
+				line-height: 40px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="h2">
+				font-size: 28px ;
+				line-height: 36px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="h3">
+				font-size: 24px ;
+				line-height: 32px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="h4">
+				font-size: 20px ;
+				line-height: 28px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="h5, th">
+				font-size: 18px ;
+				line-height: 26px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="blockquote, img, li, p, td">
+				color: #theme.colors.onSurface# ;
+				font-family: helvetica, arial, sans-serif ;
+				font-size: 18px ;
+				font-weight: 400 ;
+				line-height: 25px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="a">
+				color: #theme.colors.primary# ;
+			</core:HtmlEntityTheme>
+
+			<!---
+				Next, setup the resets. These are supposed to normalize the elements
+				across all the clients, mostly removing margins and paddings.
+			--->
+			<core:HtmlEntityTheme entity="a">
+				text-decoration: underline ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, hr, img, p">
+				Margin: 0 ; <!--- For Outlook. --->
+				margin: 0px ;
+				padding: 0px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, hr, li, img, p, td, th">
+				mso-line-height-rule: exactly ; <!--- For Outlook. --->
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="ol, ul">
+				Margin-bottom: 0 ; <!--- For Outlook. --->
+				margin-bottom: 0px ;
+				Margin-top: 0 ; <!--- For Outlook. --->
+				margin-top: 0px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="li">
+				Margin-bottom: 3px ; <!--- For Outlook. --->
+				margin-bottom: 3px ;
+				Margin-top: 3px ; <!--- For Outlook. --->
+				margin-top: 3px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="td, th">
+				padding: 0px ;
+			</core:HtmlEntityTheme>
 			
-			theme = {
-				// Color concepts have been borrowed from Material Design.
-				// --
-				// https://material.io/design/color/the-color-system.html#color-theme-creation
-				colors: {
-					// Background colors.
-					primary: "##ff3366",
-					secondary: "##ff3366",
-					background: "##fefefe",
-					surface: "##fefefe",
-					error: "##b00020",
+			<!---
+				Finally, setup whatever other entity-specific styles we need that weren't
+				covered in the core styles and the resets.
+			--->
+			<core:HtmlEntityTheme entity="blockquote">
+				border-left: 4px solid ##cccccc ;
+				font-style: italic ;
+				padding: 5px 20px 5px 30px ;
+			</core:HtmlEntityTheme>
+			<!--- DIV: No base styles. --->
+			<core:HtmlEntityTheme entity="em">
+				font-style: italic ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="hr">
+				border-top: 1px solid ##cccccc ;
+				font-size: 1px ;
+				line-height: 1px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="img">
+				border: none ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="mark">
+				background-color: yellow ;
+				display: inline-block ;
+				font-weight: 800 ;
+				padding: 0px 4px 0px 4px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="strike">
+				text-decoration: line-through ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="strong">
+				font-weight: 800 ; <!--- For Lotus Notes. --->
+			</core:HtmlEntityTheme>
 
-					// Foreground colors.
-					onPrimary: "##ffffff",
-					onSecondary: "##ffffff",
-					onBackground: "##22252b",
-					onSurface: "##22252b",
-					onError: "##ffffff",
-
-					// Miscellaneous colors.
-					link: "##ff3366"
-				},
-				importUrls: [],
-				fonts: {
-					body: {
-						family: "Helvetica, Arial, sans-serif",
-						size: "18px",
-						weight: "400",
-						lineHeight: "1.35"
-					},
-					h1: {
-						family: "Helvetica, Arial, sans-serif",
-						size: "32px",
-						weight: "800",
-						lineHeight: "1.35"
-					},
-					h2: {
-						family: "Helvetica, Arial, sans-serif",
-						size: "28px",
-						weight: "800",
-						lineHeight: "1.35"
-					},
-					h3: {
-						family: "Helvetica, Arial, sans-serif",
-						size: "24px",
-						weight: "800",
-						lineHeight: "1.35"
-					},
-					h4: {
-						family: "Helvetica, Arial, sans-serif",
-						size: "20px",
-						weight: "800",
-						lineHeight: "1.35"
-					},
-					h5: {
-						family: "Helvetica, Arial, sans-serif",
-						size: "18px",
-						weight: "800",
-						lineHeight: "1.35"
-					}
-				},
-				width: 600
-			};
-
-			headerStyleBlocks = [];
-			headerContentBlocks = [];
-
-		</cfscript>
+		</cfoutput>
 	</cfcase>
 	<cfcase value="end">
 		<cfoutput>
 
 			<core:Styles variable="bodyStyle">
-				background-color: #theme.colors.background# ;
-				color: #theme.colors.onBackground# ;
 				Margin: 0 ; <!--- For Outlook. --->
 				margin: 0px ;
 				padding: 0px ;
@@ -122,11 +209,10 @@
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 					<!--- We need to hide this from Windows Live Mail. --->
-					<!--[if !mso]><!-->
-					<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-					<!--<![endif]-->
+					<core:IfNotMso>
+						<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+					</core:IfNotMso>
 
-					<!--- https://www.litmus.com/blog/what-email-marketers-need-to-know-about-ios-11-and-the-new-iphones/ --->
 					<meta name="x-apple-disable-message-reformatting" />
 					<meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no" />
 
@@ -134,32 +220,28 @@
 						#encodeForHtml( attributes.subject )#
 					</title>
 
-					<!---
-						Outlook can choke on external font loading. As such, we want to
-						include our font @import for Non-MSO clients only. Then, for MSO
-						clients, we want a Style block that is just the system fonts.
-					--->
 					<cfif theme.importUrls.len()>
 
-						<!--[if !mso]><!-->
-						<cfloop value="local.importUrl" array="#theme.importUrls#">
+						<!---
+							Outlook can choke on external font loading. As such, we want
+							to include our font @import for Non-MSO clients only. Then,
+							for MSO clients, we want a Style block that is just the
+							system fonts.
+							--
+							CAUTION: The fallback style block has to be in the email-
+							specific Body since we won't know what default fonts to use.
+						--->
+						<core:IfNotMso>
 
-							<style type="text/css">
-								@import url( "#encodeForCss( theme.fonts.importUrl )#" ) ;
-							</style>
+							<cfloop value="importUrl" array="#theme.importUrls#">
+								<style type="text/css">
+									@import url( "#encodeForCss( importUrl )#" ) ;
+								</style>
+							</cfloop>
 
-						</cfloop>
-						<!--<![endif]-->
+						</core:IfNotMso>					
 
 					</cfif>
-					<!--[if mso]>
-					<style type="text/css">
-						body, table, td, a, h1, h2, h3, h4, h5, p {
-							font-family: Helvetica, Arial, sans-serif !important ;
-						}
-						div { Margin: 0 ; margin: 0 !important ; }
-					</style>
-					<![endif]-->
 
 					<!---
 						CAUTION: Header style tags are not supported in all email
@@ -242,16 +324,16 @@
 					</cfif>
 
 					<!--- Needed for property image scaling in some Outlook versions. --->
-					<!--[if gte mso 9]>
-					<noscript>
-						<xml>
-							<o:OfficeDocumentSettings>
-							<o:AllowPNG/>
-							<o:PixelsPerInch>96</o:PixelsPerInch>
-							</o:OfficeDocumentSettings>
-						</xml>
-					</noscript>
-					<![endif]-->
+					<core:IfMso gte="9">
+						<noscript>
+							<xml>
+								<o:OfficeDocumentSettings>
+								<o:AllowPNG/>
+								<o:PixelsPerInch>96</o:PixelsPerInch>
+								</o:OfficeDocumentSettings>
+							</xml>
+						</noscript>
+					</core:IfMso>
 				</head>
 				<body class="email-body" style="#bodyStyle#">
 
@@ -262,11 +344,9 @@
 						lang="en"
 						aria-roledescription="email"
 						aria-label="#encodeForHtmlAttribute( attributes.subject )#"
-						class="email-body-article"
+						class="email-body-outer-wrapper"
 						style="#articleStyle#">
-
 						#thistag.generatedContent#
-
 					</div>
 
 				</body>
@@ -301,13 +381,13 @@
 
 		var newline = chr( 10 );
 
-		var minifiedContent = content.trim();
+		var minifiedContent = trim( arguments.content );
 		// Normalizing line-breaks and spaces.
 		minifiedContent = reReplaceAll( minifiedContent, "(?m)^[ \t]+", "" );
 		minifiedContent = reReplaceAll( minifiedContent, "[\r\n]+", newline );
 		// Wrap each STYLE attribute onto its own line in order to help prevent mid-
 		// style text-wrapping applied by the more stringent email clients.
-		minifiedContent = reReplaceAll( minifiedContent, "(\bstyle=""[^""]+""(?: |>))", "#newline#$1" );
+		minifiedContent = reReplaceAll( minifiedContent, "(\bstyle="")", "#newline#$1" );
 
 		return( minifiedContent );
 
@@ -330,9 +410,9 @@
 		required string replacementText
 		) {
 
-		var result = javaCast( "string", input ).replaceAll(
-			javaCast( "string", patternText ),
-			javaCast( "string", replacementText )
+		var result = javaCast( "string", arguments.input ).replaceAll(
+			javaCast( "string", arguments.patternText ),
+			javaCast( "string", arguments.replacementText )
 		);
 
 		return( result );

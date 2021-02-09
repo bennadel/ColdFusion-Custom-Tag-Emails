@@ -32,19 +32,24 @@
 	* I serialize the given inline style properties, bringing the font-family and MSO
 	* line-height rules to the top where they are less likely to break things.
 	* 
-	* @content I am the Style block being serialized.
+	* @entityStyleBlock I am the Style block being serialized.
 	* @entityName I am the tag-name of the entity being styled.
 	* @entityClass I am the class-name of the entity being styled.
 	* @entityStyle I am the inline style of the entity being styled.
 	*/
 	public string function compileProperties(
-		required string content,
+		required string entityStyleBlock,
 		required string entityName,
 		required string entityClass,
 		required string entityStyle
 		) {
 
-		var blocks = gatherCascadingStyles( content, entityName, entityClass, entityStyle );
+		var blocks = gatherCascadingStyles(
+			arguments.entityStyleBlock,
+			arguments.entityName,
+			arguments.entityClass,
+			arguments.entityStyle
+		);
 		var newline = chr( 10 );
 		// CAUTION: I am using an ORDERED STRUCT here specifically to make sure that we
 		// output the compiled properties in the same order that the developer provided
@@ -57,78 +62,53 @@
 		// order to compile the unique list of CSS properties with proper overrides.
 		for ( var block in blocks ) {
 
-			var blockProps = splitBlock( block ).each(
-				( line ) => {
-
-					var parts = parseLine( line );
-
-					if ( parts.name.len() && parts.value.len() ) {
-
-						uniqueProperties[ parts.name ] = parts.value;
-
-					}
-
-				}
-			);
+			structAppend( uniqueProperties, parseBlock( block ) );
 
 		}
 
 		// Now that we've compiled all the cascade of Tag DOM properties down into a set
 		// of unique properties, let's generate the collection of unique key-value pairs.
+		// However, when we generate the inline Style attribute, we want to move several
+		// of the propreties to the front of the list.
+		// --
+		// CAUTION: The "font-family" property is likely to be the longest and is mostly
+		// likely to be WRAPPED by the SMTP server due to line-length restrictions. As
+		// such, let's always sort the "font-family" to the front of the resultant STYLE
+		// attribute so that it has the most possible breathing room.
+		// --
+		// NOTE: When the email is rendered, all STYLE attributes will be
+		// placed on their own line, which should further help with wrapping
+		// issues.
+		// --
+		// CAUTION: For Outlook, the "mso-line-height-rule" is always supposed to be
+		// defined before the "line-height" rule. As such, let's bubble it up to the top
+		// (but after "font-family").
+		var fontFamilyLine = "";
+		var msoLineHeightRule = "";
+
 		for ( var key in uniqueProperties ) {
 
-			uniquePropertyLines.append( "#key#:#uniqueProperties[ key ]#;" );
+			if ( key == "font-family" ) {
+
+				fontFamilyLine = "#key#:#uniqueProperties[ key ]#; ";
+
+			} else if ( key == "mso-line-height-rule" ) {
+
+				msoLineHeightRule = "#key#:#uniqueProperties[ key ]#; ";
+
+			} else {
+
+				uniquePropertyLines.append( "#key#:#uniqueProperties[ key ]#;" );
+
+			}
 
 		}
 
-		// Now that we have compiled set of unique CSS property lines, let's sort them
-		// so that we can fix some mail-client quirks.
-		var results = uniquePropertyLines
-			.sort(
-				( a, b ) => {
-
-					// CAUTION: The "font-family" property is likely to be the longest
-					// and is mostly likely to be WRAPPED by the SMTP server due to
-					// line-length restrictions. As such, let's always sort the "font-
-					// family" to the front of the resultant STYLE attribute so that it
-					// has the most possible breathing room.
-					// --
-					// NOTE: When the email is rendered, all STYLE attributes will be
-					// placed on their own line, which should further help with wrapping
-					// issues.
-					if ( a.reFind( "^font-family" ) ) {
-
-						return( -1 );
-
-					} else if ( b.reFind( "^font-family" ) ) {
-
-						return( 1 );
-
-					}
-
-					// CAUTION: For Outlook, the "mso-line-height-rule" is always
-					// supposed to be defined before the "line-height" rule. As such,
-					// let's bubble it up to the top (but after "font-family").
-					if ( a.reFind( "^mso-line-height-rule" ) ) {
-
-						return( -1 );
-
-					} else if ( b.reFind( "^mso-line-height-rule" ) ) {
-
-						return( 1 );
-
-					}
-
-					// If this is not a special case, leave the items in their original
-					// sort order.
-					return( 0 );
-
-				}
-			)
-			.toList( " " )
-		;
-
-		return( results );
+		return(
+			fontFamilyLine &
+			msoLineHeightRule &
+			uniquePropertyLines.toList( " " )
+		);
 
 	}
 
@@ -137,12 +117,13 @@
 	* I traverse the Custom Tag DOM (Document Object Model), gathering the styles
 	* overrides and theming that has been put in place by other custom tags.
 	* 
+	* @entityStyleBlock I am the inline styles of the Style block for the entity.
 	* @entityName I am the tag-name of the entity being styled.
 	* @entityClass I am the class-name of the entity being styled.
 	* @entityStyle I am the inline style of the entity being styled.
 	*/
 	public array function gatherCascadingStyles(
-		required string rootStyleBlock,
+		required string entityStyleBlock,
 		required string entityName,
 		required string entityClass,
 		required string entityStyle
@@ -156,32 +137,18 @@
 		// it comes to runtime styling (meaning, higher-up styles can be overridden by
 		// lower-down styles). That said, we only need to do this IF we have an entity
 		// tag-name (as this is what defines the theme-variables).
-		if ( entityName.len() ) {
+		if ( arguments.entityName.len() ) {
 
-			var classNames = splitClassNames( entityClass );
-			var themeVariableName = "$$internal:styles:#entityName#";
-
-			var adjustedIndex = 0;
+			var classNames = splitClassNames( arguments.entityClass );
+			var themeVariableName = "$$entity:theme:#arguments.entityName#";
 
 			loop
 				index = "local.i"
 				value = "local.tagName"
 				array = splitBaseTagList( getBaseTagList() )
 				{
-
-				adjustedIndex++;
-
-				if (
-					( tagName == "cfsavecontent" ) ||
-					( tagName == "cfsilent" )
-					) {
-
-					adjustedIndex--;
-					continue;
-
-				}
-
-				var parentTag = getBaseTagData( tagName, ( adjustedIndex - 1 ) );
+				
+				var parentTag = getBaseTagData( tagName, ( i - 1 ) );
 
 				// Since we are walking UP the Tag DOM, we need to add styles in reverse
 				// order of precedence. And, since "class name" styles are more specific
@@ -190,7 +157,7 @@
 
 					var themeClassVariableName = "#themeVariableName#.#className#";
 
-					if ( entityClass.len() && parentTag.keyExists( themeClassVariableName ) ) {
+					if ( arguments.entityClass.len() && parentTag.keyExists( themeClassVariableName ) ) {
 
 						styleBlocks.prepend( parentTag[ themeClassVariableName ] );
 
@@ -209,20 +176,47 @@
 
 		}
 
-		// Since the root styles need to have the lowest precedent, add it to the front
-		// of the style blocks.
-	// styleBlocks.prepend( rootStyleBlock );
-		styleBlocks.append( rootStyleBlock );
+		// The entity styles have the next-to-highest precedence, being overridden only
+		// by the optional inline styles.
+		styleBlocks.append( arguments.entityStyleBlock );
 
-		// And, since the inline styles need to have the highest precedent, add it to the
-		// end of the style blocks.
-		if ( entityStyle.len() ) {
+		// The inline styles need to have the highest precedent, so they need to be added
+		// to the end of the style blocks.
+		if ( arguments.entityStyle.len() ) {
 
-			styleBlocks.append( entityStyle );
+			styleBlocks.append( arguments.entityStyle );
 
 		}
 
 		return( styleBlocks );
+
+	}
+
+
+	/**
+	* I parse the block of CSS properties into a struct of key-value pairs.
+	* 
+	* @block I am the CSS block being parsed.
+	*/
+	public struct function parseBlock( required string block )
+		cachedWithin = "request"
+		{
+
+		var blockProperties = [:];
+
+		for ( var line in splitBlock( arguments.block ) ) {
+
+			var parts = parseLine( line );
+
+			if ( parts.isValid ) {
+
+				blockProperties[ parts.name ] = parts.value;
+
+			}
+
+		}
+
+		return( blockProperties );
 
 	}
 
@@ -236,8 +230,8 @@
 		cachedWithin = "request"
 		{
 
-		var name = line.listFirst( ":" ).trim().lcase();
-		var value = line.listRest( ":" )
+		var name = arguments.line.listFirst( ":" ).trim().lcase();
+		var value = arguments.line.listRest( ":" )
 			.trim()
 			// Remove spaces around commas.
 			.reReplace( "\s*,\s*", ",", "all" )
@@ -247,7 +241,8 @@
 
 		return({
 			name: name,
-			value: value
+			value: value,
+			isValid: ( len( name ) && len( value ) )
 		});
 
 	}
@@ -256,13 +251,29 @@
 	/**
 	* I split the given base-tag list, returning the array of tag-names.
 	* 
-	* @tagList I am the list of tags-names being split.
+	* @value I am the list of tags-names being split.
 	*/
-	public array function splitBaseTagList( required string tagList )
+	public array function splitBaseTagList( required string value )
 		cachedWithin = "request"
 		{
 
-		return( tagList.listToArray() );
+		var tagNames = arguments.value.listToArray().filter(
+			( tagName ) => {
+
+				// Some ColdFusion custom tags appear to be implemented as pseudo-custom
+				// tags that don't actually expose any state. As such, we have to omit
+				// these internal tags from the list otherwise our getBaseTagData() calls
+				// will blow-up.
+				return(
+					( arguments.tagName != "cfsavecontent" ) &&
+					( arguments.tagName != "cfsilent" ) &&
+					( arguments.tagName != "cftimer" )
+				);
+
+			}
+		);
+
+		return( tagNames );
 
 	}
 
@@ -270,13 +281,13 @@
 	/**
 	* I split the given style block into an array of CSS property lines.
 	* 
-	* @block I am the style block being split.
+	* @value I am the style block being split.
 	*/
-	public array function splitBlock( required string block )
+	public array function splitBlock( required string value )
 		cachedWithin = "request"
 		{
 
-		return( block.listToArray( ";" ) );
+		return( arguments.value.listToArray( ";" ) );
 
 	}
 
@@ -291,7 +302,7 @@
 		cachedWithin = "request"
 		{
 
-		return( value.reMatch( "\S+" ) );
+		return( arguments.value.reMatch( "\S+" ) );
 
 	}
 

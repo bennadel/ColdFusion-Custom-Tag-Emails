@@ -24,11 +24,12 @@
 				entityName="strong"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-				<!--- NOTE: Explicit font-weight needed for Lotus Notes. --->
-				font-weight: 800 ;
 			</core:Styles>
 
-			<strong class="#trim( 'html-entity-strong #attributes.class#' )#" style="#inlineStyle#">#thistag.generatedContent#</strong>
+			<strong
+				class="#trim( 'html-entity-strong #attributes.class#' )#"
+				style="#inlineStyle#"
+				>#thistag.generatedContent#</strong>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

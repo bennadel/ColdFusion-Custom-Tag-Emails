@@ -26,7 +26,10 @@
 				entityStyle="#attributes.style#">
 			</core:Styles>
 
-			<em class="#trim( 'html-entity-em #attributes.class#' )#" style="#inlineStyle#">#thistag.generatedContent#</em>
+			<em
+				class="#trim( 'html-entity-em #attributes.class#' )#"
+				style="#inlineStyle#"
+				>#thistag.generatedContent#</em>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

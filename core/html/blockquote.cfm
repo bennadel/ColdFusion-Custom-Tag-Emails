@@ -19,9 +19,6 @@
 				entityName="blockquote"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-				border-left: 4px solid ##cccccc ;
-				font-style: italic ;
-				padding: 5px 20px 5px 30px ;
 			</core:Styles>
 
 			<core:BlockMargins margins="#attributes.margins#">

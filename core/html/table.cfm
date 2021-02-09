@@ -3,9 +3,15 @@
 <cfimport prefix="core" taglib="../" />
 
 <!--- Define custom tag attributes. --->
+<cfparam name="attributes.align" type="string" default="center" />
+<cfparam name="attributes.border" type="string" default="0" />
+<cfparam name="attributes.cellspacing" type="string" default="0" />
+<cfparam name="attributes.cellpadding" type="string" default="0" />
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.margins" type="string" default="none xxsmall" />
+<cfparam name="attributes.margins" type="string" default="none normal" />
+<cfparam name="attributes.presentation" type="boolean" default="true" />
 <cfparam name="attributes.style" type="string" default="" />
+<cfparam name="attributes.width" type="string" default="" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -16,18 +22,28 @@
 
 			<core:Styles
 				variable="inlineStyle"
-				entityName="h4"
+				entityName="table"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
 			</core:Styles>
 
 			<core:BlockMargins margins="#attributes.margins#">
 
-				<h4
-					class="#trim( 'html-entity-h4 #attributes.class#' )#"
+				<table
+					<cfif len( attributes.width )>
+						width="#attributes.width#"
+					</cfif>
+					align="#attributes.align#"
+					border="#attributes.border#"
+					cellspacing="#attributes.cellspacing#"
+					cellpadding="#attributes.cellpadding#"
+					<cfif attributes.presentation>
+						role="presentation"
+					</cfif>
+					class="#trim( 'html-entity-table #attributes.class#' )#"
 					style="#inlineStyle#">
 					#thistag.generatedContent#
-				</h4>
+				</table>
 
 			</core:BlockMargins>
 

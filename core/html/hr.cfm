@@ -19,19 +19,15 @@
 				entityName="hr"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-				border-top: 1px solid ##cccccc ;
-				font-size: 1px ;
-				line-height: 0% ;
-				Margin: 0 ; <!--- For Outlook. --->
-				margin: 0px ;
-				mso-line-height-rule: exactly ;
-				padding: 0px ;
 			</core:Styles>
 
 			<core:BlockMargins margins="#attributes.margins#">
 
-				<div class="#trim( 'html-entity-hr #attributes.class#' )#" style="#inlineStyle#">
-					<br />
+				<div
+					aria-hidden="true"
+					class="#trim( 'html-entity-hr #attributes.class#' )#"
+					style="#inlineStyle#">
+					&nbsp;<br />
 				</div>
 
 			</core:BlockMargins>

@@ -1,14 +1,54 @@
+<cfscript>
 
-<cfswitch expression="#thistag.executionMode#">
-	<cfcase value="end">
+	// Define custom tag attributes.
+	param name="attributes.runonce" type="boolean" default=true;
 
-		<cfset getBaseTagData( "cf_email" )
-			.headerContentBlocks
-			.append( thistag.generatedContent )
-		/>
+	// ------------------------------------------------------------------------------- //
+	// ------------------------------------------------------------------------------- //
 
-		<!--- This tag doesn't generate output - it only manipulates variables. --->
-		<cfset thistag.generatedContent = "" />
+	switch ( thistag.executionMode ) {
+		case "end":
 
-	</cfcase>
-</cfswitch>
+			if ( attributes.runonce ) {
+
+				cacheKey = getCacheKey( thistag.generatedContent );
+
+				if ( request.keyExists( cacheKey ) ) {
+
+					thistag.generatedContent = "";
+					exit method="exitTag";
+
+				}
+
+				request[ cacheKey ] = true;
+
+			}
+
+			getBaseTagData( "cf_email" )
+				.headerContentBlocks
+				.append( thistag.generatedContent )
+			;
+
+			// This tag doesn't generate output - it only manipulates variables.
+			thistag.generatedContent = "";
+
+		break;
+	}
+
+	// ------------------------------------------------------------------------------- //
+	// ------------------------------------------------------------------------------- //
+
+	/**
+	* I return the cache key for the given tag content.
+	* 
+	* @content I am the tag content being inspected.
+	*/
+	public string function getCacheKey( required string content )
+		cachedWithin = "request"
+		{
+
+		return( "$$HeaderContentRunOnceCache:#hash( arguments.content )#" );
+
+	}
+
+</cfscript>

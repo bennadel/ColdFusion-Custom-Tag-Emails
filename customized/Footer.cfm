@@ -1,6 +1,7 @@
 
 <!--- Import custom tag libraries. --->
 <cfimport prefix="core" taglib="../core/" />
+<cfimport prefix="html" taglib="../core/html/" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -15,41 +16,35 @@
 				padding: 25px 0px 30px 0px ;
 				text-align: center ;
 			</core:Styles>
-			<core:Styles variable="titleStyle">
+			<core:HtmlEntityTheme entity="h3">
 				color: ##313745 ;
-				font-family: #theme.fonts.baseFontFamily# ;
 				font-size: 12px ;
 				letter-spacing: 0.5px ;
 				line-height: 17px ;
-				margin: 0px 0px 7px 0px ;
 				text-transform: uppercase ;
-			</core:Styles>
-			<core:Styles variable="subtitleStyle">
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="h4">
 				color: ##6c7689 ;
-				font-family: #theme.fonts.baseFontFamily# ;
 				font-size: 12px ;
-				font-weight: lighter ;
+				font-weight: 300 ;
 				line-height: 17px ;
-				margin: 0px 0px 0px 0px ;
-			</core:Styles>
+			</core:HtmlEntityTheme>
 
-			<table align="center" cellpadding="0" cellspacing="0" role="presentation">
-			<tbody>
-				<tr>
-					<td style="#containerStyle#">
+			<html:table align="center">
+			<html:tr>
+				<html:td style="#containerStyle#">
 
-						<h3 style="#titleStyle#">
-							Powered by Lucee CFML
-						</h3>
+					<html:h3 margins="none small">
+						Powered by Lucee CFML
+					</html:h3>
 
-						<h4 style="#subtitleStyle#">
-							The leading open-source CFML application server/engine
-						</h4>
+					<html:h4 margins="none">
+						The leading open-source CFML application server/engine
+					</html:h4>
 
-					</td>
-				</tr>
-			</tbody>
-			</table>
+				</html:td>
+			</html:tr>
+			</html:table>
 
 		</cfoutput>
 	</cfcase>

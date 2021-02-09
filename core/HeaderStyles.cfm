@@ -1,7 +1,7 @@
 <cfscript>
 
 	// Define custom tag attributes.
-	param name="attributes.runonce" type="boolean" default=false;
+	param name="attributes.runonce" type="boolean" default=true;
 
 	// ------------------------------------------------------------------------------- //
 	// ------------------------------------------------------------------------------- //
@@ -15,6 +15,7 @@
 
 				if ( request.keyExists( cacheKey ) ) {
 
+					thistag.generatedContent = "";
 					exit method="exitTag";
 
 				}
@@ -46,7 +47,7 @@
 		cachedWithin = "request"
 		{
 
-		return( "$$HeaderStylesRunOnceCache:#hash( content )#" );
+		return( "$$HeaderStylesRunOnceCache:#hash( arguments.content )#" );
 
 	}
 

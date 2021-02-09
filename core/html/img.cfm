@@ -9,6 +9,7 @@
 <cfimport prefix="core" taglib="../" />
 
 <!--- Define custom tag attributes. --->
+<cfparam name="attributes.align" type="string" default="" />
 <cfparam name="attributes.alt" type="string" default="" />
 <cfparam name="attributes.class" type="string" default="" />
 <cfparam name="attributes.height" type="string" default="" />
@@ -28,18 +29,23 @@
 				entityName="img"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-				border: none ;
 			</core:Styles>
 
 			<img
 				src="#encodeForHtmlAttribute( attributes.src )#"
-				alt="#encodeForHtmlAttribute( attributes.alt )#"
-				<cfif attributes.width.len()>
-					width="#encodeForHtmlAttribute( attributes.width )#"
+				<cfif len( attributes.alt )>
+					alt="#encodeForHtmlAttribute( attributes.alt )#"
 				</cfif>
-				<cfif attributes.height.len()>
-					height="#encodeForHtmlAttribute( attributes.height )#"
+				<cfif len( attributes.width )>
+					width="#attributes.width#"
 				</cfif>
+				<cfif len( attributes.height )>
+					height="#attributes.height#"
+				</cfif>
+				<cfif len( attributes.align )>
+					align="#attributes.align#"
+				</cfif>
+				loading="lazy"
 				class="#trim( 'html-entity-img #attributes.class#' )#"
 				style="#inlineStyle#"
 			/>

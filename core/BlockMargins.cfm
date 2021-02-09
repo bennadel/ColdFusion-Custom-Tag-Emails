@@ -11,14 +11,34 @@
 <cfswitch expression="#thistag.executionMode#">
 	<cfcase value="start">
 
-		<cfset margins = attributes.margins.listToArray( " " ) />
+		<cfset margins = splitMargins( attributes.margins ) />
 
-		<core:Margin size="#margins.first()#" />
+		<core:Margin size="#arrayFirst( margins )#" />
 
 	</cfcase>
 	<cfcase value="end">
 
-		<core:Margin size="#margins.last()#" />
-			
+		<core:Margin size="#arrayLast( margins )#" />
+
 	</cfcase>
 </cfswitch>
+
+<!--- // ------------------------------------------------------------------------- // --->
+<!--- // ------------------------------------------------------------------------- // --->
+
+<cfscript>
+
+	/**
+	* I split the given margins into an array.
+	* 
+	* @value I am the margins value being split.
+	*/
+	public array function splitMargins( required string value )
+		cachedWithin = "request"
+		{
+
+		return( listToArray( arguments.value, " " ) );
+
+	}
+
+</cfscript>

@@ -24,13 +24,12 @@
 				entityName="mark"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-				background-color: yellow ;
-				display: inline-block ;
-				font-weight: bold ;
-				padding: 0px 4px 0px 4px ;
 			</core:Styles>
 
-			<mark class="#trim( 'html-entity-mark #attributes.class#' )#" style="#inlineStyle#">#thistag.generatedContent#</mark>
+			<mark
+				class="#trim( 'html-entity-mark #attributes.class#' )#"
+				style="#inlineStyle#"
+				>#thistag.generatedContent#</mark>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

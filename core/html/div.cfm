@@ -4,7 +4,7 @@
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.margins" type="string" default="none normal" />
+<cfparam name="attributes.margins" type="string" default="none none" />
 <cfparam name="attributes.style" type="string" default="" />
 
 <!--- // ------------------------------------------------------------------------- // --->
@@ -23,7 +23,9 @@
 
 			<core:BlockMargins margins="#attributes.margins#">
 
-				<div class="#trim( 'html-entity-div #attributes.class#' )#" style="#inlineStyle#">
+				<div
+					class="#trim( 'html-entity-div #attributes.class#' )#"
+					style="#inlineStyle#">
 					#thistag.generatedContent#
 				</div>
 
