@@ -53,7 +53,7 @@
 
 			<core:BlockMargins margins="#attributes.margins#">
 
-				<html:table width="100%" class="standard-gray-callout">
+				<html:table width="100%" margins="none" class="standard-gray-callout">
 				<html:tr>
 					<html:td bgcolor="##f0f0f0" class="#trim( 'standard-gray-callout__content #attributes.class#' )#" style="#inlineStyle#">
 

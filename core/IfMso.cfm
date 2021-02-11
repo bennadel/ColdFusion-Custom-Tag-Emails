@@ -1,3 +1,7 @@
+<!---
+	Some good information on targeting MSO versions can be seen here in StackOverflow's
+	email best practices documentation: https://stackoverflow.design/email/base/mso/
+--->
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.gte" type="string" default="" />

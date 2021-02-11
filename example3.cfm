@@ -20,7 +20,7 @@
 			The above title and is paragraph tag will use the base styles.
 		</html:p>
 
-		<customized:Gray margins="none">
+		<customized:Gray>
 			<!---
 				The Gray callout is a customized ColdFusion Custom Tag widget that the
 				developer would author. The Gray callout would take care of defining the
