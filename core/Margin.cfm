@@ -39,42 +39,50 @@
 	<cfargument name="size" type="string" required="true" />
 
 	<cfswitch expression="#arguments.size#">
-		<cfcase value="xxxsmall,2">
+		<cfcase value="xxxsmall">
 			<cfset var height = "2px" />
 		</cfcase>
-		<cfcase value="xxsmall,4">
+		<cfcase value="xxsmall">
 			<cfset var height = "4px" />
 		</cfcase>
-		<cfcase value="xsmall,8">
+		<cfcase value="xsmall">
 			<cfset var height = "8px" />
 		</cfcase>
-		<cfcase value="small,12">
+		<cfcase value="small">
 			<cfset var height = "12px" />
 		</cfcase>
-		<cfcase value="normal,16">
+		<cfcase value="normal">
 			<cfset var height = "16px" />
 		</cfcase>
-		<cfcase value="large,20">
+		<cfcase value="large">
 			<cfset var height = "20px" />
 		</cfcase>
-		<cfcase value="xlarge,24">
+		<cfcase value="xlarge">
 			<cfset var height = "24px" />
 		</cfcase>
-		<cfcase value="xxlarge,28">
+		<cfcase value="xxlarge">
 			<cfset var height = "28px" />
 		</cfcase>
-		<cfcase value="xxxlarge,32">
+		<cfcase value="xxxlarge">
 			<cfset var height = "32px" />
 		</cfcase>
-		<cfcase value="xxxxlarge,36">
+		<cfcase value="xxxxlarge">
 			<cfset var height = "36px" />
 		</cfcase>
 		<cfdefaultcase>
-			<cfthrow
-				type="InvalidMarginSize"
-				message="Core:Margin invalid margin size"
-				detail="Margin: #arguments.size#"
-			/>
+			<cfif isNumeric( arguments.size )>
+
+				<cfset var height = "#arguments.size#px" />
+
+			<cfelse>
+
+				<cfthrow
+					type="InvalidMarginSize"
+					message="Core:Margin invalid margin size"
+					detail="Margin: #arguments.size#"
+				/>
+
+			</cfif>
 		</cfdefaultcase>
 	</cfswitch>
 

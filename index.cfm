@@ -39,6 +39,9 @@
 		<li>
 			<a href="./example8.cfm">Example 8</a>
 		</li>
+		<li>
+			<a href="./example9.cfm">Example 9</a>
+		</li>
 	</ul>
 
 </body>
