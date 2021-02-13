@@ -27,17 +27,13 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<cfset theme = getBaseTagData( "cf_email" ).theme />
-			<cfset maxWidth = ( attributes.maxWidth ? attributes.maxWidth : theme.width ) />
 			<cfset className = "email-if-desktop-view-wrapper" />
 
-			<core:HeaderStyles>
-				@media only screen and ( max-width: #maxWidth#px ) {
-					.#className# {
-						display: none !important ;
-					}
+			<core:MaxWidthStyles width="#attributes.maxWidth#">
+				.#className# {
+					display: none ;
 				}
-			</core:HeaderStyles>
+			</core:MaxWidthStyles>
 
 			<html:table width="100%" margins="none" class="#className#">
 			<html:tr>
@@ -68,7 +64,7 @@
 		cachedWithin = "request"
 		{
 
-		var parentTags = baseTagList.listRest( "," ).listToArray();
+		var parentTags = arguments.baseTagList.listRest( "," ).listToArray();
 
 		return(
 			parentTags.containsNoCase( "cf_IfDesktopView" ) ||

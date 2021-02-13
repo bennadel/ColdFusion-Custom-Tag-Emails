@@ -35,27 +35,23 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<cfset theme = getBaseTagData( "cf_email" ).theme />
-
 			<core:Styles
 				variable="inlineStyle"
 				entityStyle="#attributes.style#">
 				background-color: ##f0f0f0 ;
 				padding: 20px 30px 20px 30px ;
 			</core:Styles>
-			<core:HeaderStyles>
-				@media only screen and ( max-width: #theme.width#px ) {
-					.standard-gray-callout__content {
-						padding: 10px 10px 10px 10px !important ;
-					}
+			<core:MaxWidthStyles>
+				.standard-gray-callout__content {
+					padding: 10px 10px 10px 10px ;
 				}
-			</core:HeaderStyles>
+			</core:MaxWidthStyles>
 
 			<core:BlockMargins margins="#attributes.margins#">
 
 				<html:table width="100%" margins="none" class="standard-gray-callout">
 				<html:tr>
-					<html:td bgcolor="##f0f0f0" class="#trim( 'standard-gray-callout__content #attributes.class#' )#" style="#inlineStyle#">
+					<html:td class="#trim( 'standard-gray-callout__content #attributes.class#' )#" style="#inlineStyle#">
 
 						#thistag.generatedContent#
 

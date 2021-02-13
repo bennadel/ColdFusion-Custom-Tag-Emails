@@ -21,7 +21,7 @@
 				display: block ;
 			</core:Styles>
 			<core:Styles variable="wrapperStyle">
-				background-color: #theme.colors.primary# ;
+				background-color: #theme.light.primary# ;
 				border-radius: 48px 48px 48px 48px ;
 				font-size: 16px ;
 				line-height: 1 ;
@@ -29,7 +29,7 @@
 			</core:Styles>
 			<core:Styles variable="innerLinkStyle">
 				border: 0 ;
-				color: #theme.colors.onPrimary# ;
+				color: #theme.light.onPrimary# ;
 				display: block ;
 				letter-spacing: 0.05px ;
 			</core:Styles>
@@ -46,8 +46,7 @@
 				<html:a href="#attributes.href#" decoration="false" style="#outerLinkStyle#">
 					<html:table cellpadding="20" margins="none none">
 					<html:tr>
-						<!--- NOTE: "bgcolor" is needed for Lotus Notes. --->
-						<html:td bgcolor="#theme.colors.primary#" style="#wrapperStyle#">
+						<html:td style="#wrapperStyle#">
 							<html:a href="#attributes.href#"  decoration="false" style="#innerLinkStyle#">
 								#thistag.generatedContent#
 							</html:a>

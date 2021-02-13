@@ -27,7 +27,7 @@
 			</core:Styles>
 
 			<em
-				class="#trim( 'html-entity-em #attributes.class#' )#"
+				class="#trim( '#attributes.class#' )#"
 				style="#inlineStyle#"
 				>#thistag.generatedContent#</em>
 

@@ -15,23 +15,19 @@
 			<core:HtmlEntityTheme entity="td" class="email-body-content">
 				padding: 30px 0px 30px 0px ;
 			</core:HtmlEntityTheme>
-			<core:HeaderStyles>
-				@media only screen and ( max-width: #theme.width#px ) {
-
-					.email-body-wrapper {
-						width: 100% !important ;
-					}
-
-					.email-body-gutter {
-						width: 20px !important ;
-					}
-
-					.email-body-content {
-						padding: 20px 0px 20px 0px !important ;
-					}
-
+			<core:MaxWidthStyles>
+				.email-body-wrapper {
+					width: 100% ;
 				}
-			</core:HeaderStyles>
+
+				.email-body-gutter {
+					width: 20px ;
+				}
+
+				.email-body-content {
+					padding: 20px 0px 20px 0px ;
+				}
+			</core:MaxWidthStyles>
 
 			<html:table width="#theme.width#" class="email-body-wrapper">
 			<html:tr>

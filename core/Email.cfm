@@ -23,7 +23,7 @@
 					// Color concepts have been borrowed from Material Design.
 					// --
 					// https://material.io/design/color/the-color-system.html#color-theme-creation
-					colors: {
+					light: {
 						// Background colors.
 						primary: "##3f51b5",
 						secondary: "##ff3366",
@@ -38,8 +38,24 @@
 						onSurface: "##22252b",
 						onError: "##ffffff"
 					},
+					dark: {
+						// Background colors.
+						primary: "##3f51b5",
+						secondary: "##ff3366",
+						background: "##121212",
+						surface: "##121212",
+						error: "##cf6679",
+
+						// Foreground colors.
+						onPrimary: "##000000",
+						onSecondary: "##000000",
+						onBackground: "##ffffff",
+						onSurface: "##ffffff",
+						onError: "##000000"
+					},
 					importUrls: [],
-					width: 600
+					width: 600,
+					enableDarkModeSupport: false
 				};
 
 				headerStyleBlocks = [];
@@ -76,7 +92,7 @@
 				</core:HeaderContent>
 			--->
 			<core:HtmlEntityTheme entity="h1, h2, h3, h4, h5, th">
-				color: #theme.colors.onSurface# ;
+				color: #theme.light.onSurface# ;
 				font-family: garamond, georgia, serif ;
 				font-weight: 800 ;
 			</core:HtmlEntityTheme>
@@ -101,14 +117,14 @@
 				line-height: 26px ;
 			</core:HtmlEntityTheme>
 			<core:HtmlEntityTheme entity="blockquote, img, li, p, td">
-				color: #theme.colors.onSurface# ;
+				color: #theme.light.onSurface# ;
 				font-family: helvetica, arial, sans-serif ;
 				font-size: 18px ;
 				font-weight: 400 ;
 				line-height: 25px ;
 			</core:HtmlEntityTheme>
 			<core:HtmlEntityTheme entity="a">
-				color: #theme.colors.primary# ;
+				color: #theme.light.primary# ;
 			</core:HtmlEntityTheme>
 
 			<!---
@@ -208,6 +224,11 @@
 					<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+					<cfif theme.enableDarkModeSupport>
+						<meta name="color-scheme" content="light dark" />
+						<meta name="supported-color-schemes" content="light dark" />
+					</cfif>
+
 					<!--- We need to hide this from Windows Live Mail. --->
 					<core:IfNotMso>
 						<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -219,6 +240,17 @@
 					<title>
 						#encodeForHtml( attributes.subject )#
 					</title>
+
+					<cfif theme.enableDarkModeSupport>
+
+						<style type="text/css">
+							:root {
+								color-scheme: light dark ;
+								supported-color-schemes: light dark ;
+							}
+						</style>
+
+					</cfif>
 
 					<cfif theme.importUrls.len()>
 
@@ -291,16 +323,6 @@
 
 						##outlook a {
 							padding: 0 ;
-						}
-
-						<!---
-							When we switch to full-width images, make sure that the
-							height will resize appropriately.
-						--->
-						@media only screen and ( max-width: #theme.width#px ) {
-							img {
-								height: auto !important ;
-							}
 						}
 
 						<!--- Prevent Apple from highlighting / altering links. --->

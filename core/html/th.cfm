@@ -26,6 +26,19 @@
 				entityStyle="#attributes.style#">
 			</core:Styles>
 
+			<!---
+				If no bgcolor was passed in, we want to look at the calculated styles to
+				see if there is a "background-color" CSS property (long-hand format
+				only). If there is, we want to extract that and use it as the bgcolor so
+				that the developer doesn't have define background colors twice just for
+				older email clients (that support "bgcolor" but not "background-color").
+			--->
+			<cfif ! len( attributes.bgcolor )>
+
+				<cfset attributes.bgcolor = extractBackgroundColor( inlineStyle ) />
+
+			</cfif>
+
 			<th
 				<cfif len( attributes.colspan )>
 					colspan="#attributes.colspan#"
@@ -52,3 +65,37 @@
 		</cfoutput>
 	</cfcase>
 </cfswitch>
+
+<!--- // ------------------------------------------------------------------------- // --->
+<!--- // ------------------------------------------------------------------------- // --->
+
+<cfscript>
+
+	/**
+	* I extract the color hex from the given style block; or, the empty string if there
+	* is no "background-color" property.
+	* 
+	* CAUTION: This only works for long-hand "background-color" properties. And, only for
+	* 6-digit hex values.
+	* 
+	* @styleBlock I am the CSS being inspected.
+	*/
+	public string function extractBackgroundColor( required string styleBlock )
+		cachedWithin = "request"
+		{
+
+		var matches = arguments.styleBlock.reMatchNoCase( "background-color:\s*##[0-9a-f]{6}\b" );
+
+		if ( matches.len() ) {
+
+			return( matches[ 1 ].right( 7 ) );
+
+		} else {
+
+			return( "" );
+
+		}
+
+	}
+
+</cfscript>

@@ -19,24 +19,18 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<cfset theme = getBaseTagData( "cf_email" ).theme />
-
 			<cfset horizontalTableClass = "c-#createUniqueId()#" />
 			<cfset verticalTableClass = "c-#createUniqueId()#" />
 
-			<core:HeaderStyles>
-				@media only screen and ( max-width: #theme.width#px ) {
-
-					.#horizontalTableClass# {
-						display: none !important ;
-					}
-
-					.#verticalTableClass# {
-						display: block !important ;
-					}
-
+			<core:MaxWidthStyles>
+				.#horizontalTableClass# {
+					display: none ;
 				}
-			</core:HeaderStyles>
+
+				.#verticalTableClass# {
+					display: block ;
+				}
+			</core:MaxWidthStyles>
 
 			<core:BlockMargins margins="#attributes.margins#">
 

@@ -3,9 +3,10 @@
 <cfimport prefix="core" taglib="./" />
 
 <!--- Define custom tag attributes. --->
+<cfparam name="attributes.injectImportant" type="boolean" default="true" />
+<cfparam name="attributes.media" type="string" default="screen" />
 <cfparam name="attributes.name" type="string" />
 <cfparam name="attributes.value" type="string" />
-<cfparam name="attributes.injectImportant" type="boolean" default="true" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -15,7 +16,7 @@
 		<cfoutput>
 
 			<core:HeaderStyles>
-				@media only screen and ( #attributes.name#: #attributes.value# ) {
+				@media #attributes.media# and ( #attributes.name#: #attributes.value# ) {
 
 					#prepareStyles( thistag.generatedContent, attributes.injectImportant )#
 
@@ -47,23 +48,23 @@
 		cachedWithin = "request"
 		{
 
-		if ( ! injectImportLineFlag ) {
+		if ( ! arguments.injectImportLineFlag ) {
 
-			return( content );
+			return( arguments.content );
 
 		}
 
-		if ( content.findNoCase( "!important" ) ) {
+		if ( arguments.content.findNoCase( "!important" ) ) {
 
 			throw(
 				type = "UnexpectedImportant",
 				message = "MediaQueryStyles cannot contain !important if it is also being injected.",
-				extendedInfo = "Content: #content#"
+				extendedInfo = "Content: #arguments.content#"
 			);
 
 		}
 
-		return( content.reReplace( "(?m)(;[ \t]*$)", " !important \1", "all" ) );
+		return( arguments.content.reReplace( "(?m)(;[ \t]*$)", " !important \1", "all" ) );
 
 	}
 
