@@ -116,6 +116,7 @@
 				font-size: 18px ;
 				line-height: 26px ;
 			</core:HtmlEntityTheme>
+			<!--- IMG being included for the ALT text if the image doesn't load. --->
 			<core:HtmlEntityTheme entity="blockquote, img, li, p, td">
 				color: #theme.light.onSurface# ;
 				font-family: helvetica, arial, sans-serif ;
@@ -142,6 +143,16 @@
 			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, hr, li, img, p, td, th">
 				mso-line-height-rule: exactly ; <!--- For Outlook. --->
 			</core:HtmlEntityTheme>
+			<!---
+				In Outlook on Windows, having a line-height on a content container will
+				cause images to be clipped according to the line-height. If you are going
+				to include an image in a content container, you need to "reset" the line-
+				height value for that container.
+			--->
+			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, li, p, td, th" class="html-entity-line-height-reset">
+				line-height: unset ;
+				mso-line-height-rule: at-least ; <!--- For Outlook. --->
+			</core:HtmlEntityTheme>
 			<core:HtmlEntityTheme entity="ol, ul">
 				Margin-bottom: 0 ; <!--- For Outlook. --->
 				margin-bottom: 0px ;
@@ -157,7 +168,7 @@
 			<core:HtmlEntityTheme entity="td, th">
 				padding: 0px ;
 			</core:HtmlEntityTheme>
-			
+
 			<!---
 				Finally, setup whatever other entity-specific styles we need that weren't
 				covered in the core styles and the resets.

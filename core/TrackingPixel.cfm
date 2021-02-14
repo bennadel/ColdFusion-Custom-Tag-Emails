@@ -13,7 +13,7 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<core:Styles variable="wrapperStyle">
+			<core:Styles variable="paragraphStyle">
 				font-size: 1px ;
 				height: 1px ;
 				line-height: 1px ;
@@ -24,13 +24,34 @@
 				height: 1px ;
 				width: 1px ;
 			</core:Styles>
+			<!--- Trying to make sure that the email client doesn't mess with this. --->
+			<core:MaxWidthStyles>
+				.email-tracking-pixel {
+					font-size: 1px ;
+					height: 1px ;
+					line-height: 1px ;
+					mso-line-height-rule: exactly ;
+					overflow: hidden ;
+				}
 
-			<p aria-hidden="true" style="#wrapperStyle#">
+				.email-tracking-pixel img {
+					height: 1px ;
+					width: 1px ;
+				}
+			</core:MaxWidthStyles>
+
+			<!---
+				CAUTION: We are using raw HTML elements here instead of the "html"
+				custom tags module so that we don't accidentally apply Theme styles
+				to this markup.
+			--->
+			<p aria-hidden="true" class="email-tracking-pixel" style="#paragraphStyle#">
 				<img
 					src="#encodeForHtmlAttribute( attributes.src )#"
 					width="1"
 					height="1"
 					alt="#encodeForHtmlAttribute( attributes.alt )#"
+					class="email-tracking-pixel-image"
 					style="#imageStyle#"
 				/>
 			</p>

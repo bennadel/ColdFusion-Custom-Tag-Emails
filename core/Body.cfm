@@ -35,7 +35,9 @@
 					<!--- Left margin. ---><br />
 				</html:td>
 				<html:td class="email-body-content">
+
 					#thistag.generatedContent#
+
 				</html:td>
 				<html:td width="30" class="email-body-gutter">
 					<!--- Right margin. ---><br />

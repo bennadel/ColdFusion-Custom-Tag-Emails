@@ -11,7 +11,7 @@
 	teaser="Different constraints, different strategies">
 	<core:Body>
 
-		<html:h1 margins="none xlarge">
+		<html:h1>
 			Playing with dynamic layouts
 		</html:h1>
 

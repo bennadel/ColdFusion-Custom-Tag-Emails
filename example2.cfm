@@ -20,7 +20,7 @@
 			context of the HtmlEntityTheme, and any children.
 		--->
 
-		<html:h1 margins="none xlarge">
+		<html:h1>
 			Customizing email content is fun!
 		</html:h1>
 
@@ -70,9 +70,15 @@
 			</html:p>
 
 			<html:ol margins="none">
-				<html:li>This should be sweet, sweet magenta!</html:li>
-				<html:li>So cool!</html:li>
-				<html:li>Can't stop, can't stop the beat!</html:li>
+				<html:li>
+					This should be sweet, sweet magenta!
+				</html:li>
+				<html:li>
+					So cool!
+				</html:li>
+				<html:li>
+					Can't stop, can't stop the beat!
+				</html:li>
 			</html:ol>
 		</html:div>
 

@@ -13,7 +13,7 @@
 	teaser="See them for yourself!">
 	<core:Body>
 
-		<html:h1 margins="none large">
+		<html:h1>
 			<core:NoWrapText>Ben Nadel</core:NoWrapText> has met some truly
 			<html:a href="https://www.bennadel.com/people" decoration="false">
 				amazing people
@@ -69,7 +69,7 @@
 			to see how this all renders in email clients.
 		</html:p>
 
-		<html:h1>
+		<html:h1 margins="normal xlarge">
 			Favorite movies
 		</html:h1>
 

@@ -12,7 +12,7 @@
 	teaser="It's actually kind of neat!">
 	<core:Body>
 
-		<html:h1 margins="none xlarge">
+		<html:h1>
 			Customizing email content is fun!
 		</html:h1>
 

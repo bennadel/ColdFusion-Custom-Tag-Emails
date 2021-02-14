@@ -12,10 +12,10 @@
 <cfparam name="attributes.align" type="string" default="" />
 <cfparam name="attributes.alt" type="string" default="" />
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.height" type="string" default="" />
+<cfparam name="attributes.height" type="string" />
 <cfparam name="attributes.src" type="string" />
 <cfparam name="attributes.style" type="string" default="" />
-<cfparam name="attributes.width" type="string" default="" />
+<cfparam name="attributes.width" type="string" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->

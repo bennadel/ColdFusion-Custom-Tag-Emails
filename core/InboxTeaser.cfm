@@ -18,7 +18,7 @@
 
 			</cfif>
 
-			<core:Styles variable="inlineStyle">
+			<core:Styles variable="divStyles">
 				display: none ;
 				font-size: 0px ;
 				height: 0px ;
@@ -33,7 +33,12 @@
 				width: 0px ;
 			</core:Styles>
 
-			<div aria-hidden="true" style="#inlineStyle#">
+			<!---
+				CAUTION: We are using raw HTML elements here instead of the "html"
+				custom tags module so that we don't accidentally apply Theme styles
+				to this markup.
+			--->
+			<div aria-hidden="true" style="#divStyles#">
 				#encodeForHtml( attributes.teaser )#
 			</div>
 

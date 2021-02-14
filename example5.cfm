@@ -11,7 +11,7 @@
 	teaser="Max-widths, Min-widths, oh heck yeah!">
 	<core:Body>
 
-		<html:h1 margins="none xlarge">
+		<html:h1>
 			Playing with media queries
 		</html:h1>
 

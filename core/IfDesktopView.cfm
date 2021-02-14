@@ -1,7 +1,6 @@
 
 <!--- Import custom tag libraries. --->
 <cfimport prefix="core" taglib="./" />
-<cfimport prefix="html" taglib="./html/" />
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.maxWidth" type="numeric" default="0" />
@@ -27,21 +26,24 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<cfset className = "email-if-desktop-view-wrapper" />
-
 			<core:MaxWidthStyles width="#attributes.maxWidth#">
-				.#className# {
+				.email-if-desktop-view-wrapper {
 					display: none ;
 				}
 			</core:MaxWidthStyles>
 
-			<html:table width="100%" margins="none" class="#className#">
-			<html:tr>
-				<html:td>
+			<!---
+				CAUTION: We are using raw HTML elements here instead of the "html"
+				custom tags module so that we don't accidentally apply Theme styles
+				to this markup.
+			--->
+			<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" class="email-if-desktop-view-wrapper">
+			<tr>
+				<td>
 					#thistag.generatedContent#
-				</html:td>
-			</html:tr>
-			</html:table>
+				</td>
+			</tr>
+			</table>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

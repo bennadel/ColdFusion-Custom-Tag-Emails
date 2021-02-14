@@ -1,7 +1,6 @@
 
 <!--- Import custom tag libraries. --->
 <cfimport prefix="core" taglib="./" />
-<cfimport prefix="html" taglib="./html/" />
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.maxWidth" type="numeric" default="0" />
@@ -27,10 +26,17 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<cfset className = "email-if-mobile-view-wrapper" />
+			<core:Styles variable="tableStyles">
+				display: none ;
+				height: 0px ;
+				mso-hide: all ;
+				overflow: hidden ;
+				visibility: hidden ;
+				width: 0px ;
+			</core:Styles>
 
 			<core:MaxWidthStyles width="#attributes.maxWidth#">
-				.#className# {
+				.email-if-mobile-view-wrapper {
 					display: block ;
 					display: table ;
 					height: auto ;
@@ -42,13 +48,18 @@
 
 			<core:IfNotMso>
 
-				<html:table width="100%" margins="none" class="#className#" style="display: none ; width: 0px ; height: 0px ; overflow: hidden ; visibility: hidden ;">
-				<html:tr>
-					<html:td>
+				<!---
+					CAUTION: We are using raw HTML elements here instead of the "html"
+					custom tags module so that we don't accidentally apply Theme styles
+					to this markup.
+				--->
+				<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" class="email-if-mobile-view-wrapper" style="#tableStyles#">
+				<tr>
+					<td>
 						#thistag.generatedContent#
-					</html:td>
-				</html:tr>
-				</html:table>
+					</td>
+				</tr>
+				</table>
 
 			</core:IfNotMso>
 

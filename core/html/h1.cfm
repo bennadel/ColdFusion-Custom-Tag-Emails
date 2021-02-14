@@ -4,7 +4,7 @@
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.margins" type="string" default="normal large" />
+<cfparam name="attributes.margins" type="string" default="none large" />
 <cfparam name="attributes.style" type="string" default="" />
 
 <!--- // ------------------------------------------------------------------------- // --->
