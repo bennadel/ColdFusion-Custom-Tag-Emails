@@ -60,6 +60,7 @@
 
 				headerStyleBlocks = [];
 				headerContentBlocks = [];
+				preContentBlocks = [];
 
 			</cfscript>
 
@@ -127,6 +128,15 @@
 			<core:HtmlEntityTheme entity="a">
 				color: #theme.light.primary# ;
 			</core:HtmlEntityTheme>
+			<!---
+				While CODE is an inline tag, we need to include the font-size or some
+				older Outlook clients will make the font-size really small.
+			--->
+			<core:HtmlEntityTheme entity="code, pre">
+				font-family: consolas, monaco, monospace ;
+				font-size: 18px ;
+				line-height: 25px ;
+			</core:HtmlEntityTheme>
 
 			<!---
 				Next, setup the resets. These are supposed to normalize the elements
@@ -135,12 +145,12 @@
 			<core:HtmlEntityTheme entity="a">
 				text-decoration: underline ;
 			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, hr, img, p">
+			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, hr, img, p, pre">
 				Margin: 0 ; <!--- For Outlook. --->
 				margin: 0px ;
 				padding: 0px ;
 			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, hr, li, img, p, td, th">
+			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, hr, li, img, p, pre, td, th">
 				mso-line-height-rule: exactly ; <!--- For Outlook. --->
 			</core:HtmlEntityTheme>
 			<!---
@@ -178,6 +188,14 @@
 				font-style: italic ;
 				padding: 5px 20px 5px 30px ;
 			</core:HtmlEntityTheme>
+			<!--- I borrowed whatever MDN uses on their website for CODE styles. --->
+			<core:HtmlEntityTheme entity="code">
+				background-color: ##eeeeee ;
+				border-radius: 2px 2px 2px 2px ;
+				box-decoration-break: clone ;
+					-webkit-box-decoration-break: clone ;
+				padding: 0px 3px 0px 3px ;
+			</core:HtmlEntityTheme>
 			<!--- DIV: No base styles. --->
 			<core:HtmlEntityTheme entity="em">
 				font-style: italic ;
@@ -195,6 +213,12 @@
 				display: inline-block ;
 				font-weight: 800 ;
 				padding: 0px 4px 0px 4px ;
+			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="pre">
+				background-color: ##eeeeee ;
+				border: 1px solid ##cccccc ;
+				padding: 10px 13px 10px 13px ;
+				tab-size: 4 ;
 			</core:HtmlEntityTheme>
 			<core:HtmlEntityTheme entity="strike">
 				text-decoration: line-through ;
@@ -421,6 +445,17 @@
 		// Wrap each STYLE attribute onto its own line in order to help prevent mid-
 		// style text-wrapping applied by the more stringent email clients.
 		minifiedContent = reReplaceAll( minifiedContent, "(\bstyle="")", "#newline#$1" );
+
+		// Now that we've removed all the superfluous whitespace, as the last step in our
+		// minification, let's apply any PRE tag content (which is intended to contain
+		// meaningful whitespace).
+		preContentBlocks.each(
+			( preContent, i ) => {
+
+				minifiedContent = reReplaceAll( minifiedContent, "__PRE:#i#__", preContent );
+
+			}
+		);
 
 		return( minifiedContent );
 

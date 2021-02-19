@@ -6,3 +6,5 @@ This is a proof-of-concept in using ColdFusion custom tags to create a DSL (Doma
 ## Special Considerations
 
 * Outlook on Windows will clip images if they are contained within a parent that has an explicit `line-height`. To get around this, the several of the HTML entities support the class, `html-entity-line-height-reset`. This will "unset" the `line-height` and apply an `at-least` value for Outlook clients.
+
+* Outlook on Windows will not render `<pre>` content that uses `encodeForHtml()`. As such, you should stick to using `htmlEditFormat()` inside `<pre>` tags.

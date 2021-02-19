@@ -29,6 +29,22 @@
 	// ------------------------------------------------------------------------------- //
 
 	/**
+	* I clean up the font-family value, replacing double-quotes with single-quotes so
+	* that we don't break the inline style attribute.
+	* 
+	* @value I am the font-family property value being cleaned.
+	* 
+	*/
+	public string function cleanFontFamilyValue( required string value )
+		cachedWithin = "request"
+		{
+
+		return( value.reReplace( """", "'", "all" ) );
+
+	}
+
+
+	/**
 	* I serialize the given inline style properties, bringing the font-family and MSO
 	* line-height rules to the top where they are less likely to break things.
 	* 
@@ -90,7 +106,7 @@
 
 			if ( key == "font-family" ) {
 
-				fontFamilyLine = "#key#:#uniqueProperties[ key ]#; ";
+				fontFamilyLine = "#key#:#cleanFontFamilyValue( uniqueProperties[ key ] )#; ";
 
 			} else if ( key == "mso-line-height-rule" ) {
 

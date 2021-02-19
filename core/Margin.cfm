@@ -120,6 +120,6 @@
 			</div>
 		</td>
 	</tr>
-	</table>	
+	</table>
 
 </cffunction>

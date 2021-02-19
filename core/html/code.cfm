@@ -21,15 +21,15 @@
 
 			<core:Styles
 				variable="inlineStyle"
-				entityName="strike"
+				entityName="code"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
 			</core:Styles>
 
-			<span
-				class="#trim( 'html-entity-strike #attributes.class#' )#"
+			<code
+				class="#trim( 'html-entity-code #attributes.class#' )#"
 				style="#inlineStyle#"
-				>#thistag.generatedContent#</span>
+				>#thistag.generatedContent#</code>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

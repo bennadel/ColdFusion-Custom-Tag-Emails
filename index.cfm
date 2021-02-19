@@ -42,6 +42,9 @@
 		<li>
 			<a href="./example9.cfm">Example 9</a>
 		</li>
+		<li>
+			<a href="./example10.cfm">Example 10</a>
+		</li>
 	</ul>
 
 </body>

@@ -23,7 +23,12 @@
 
 			<core:BlockMargins margins="#attributes.margins#">
 
-				<table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+				<!---
+					CAUTION: We are using raw HTML elements here instead of the "html"
+					custom tags module so that we don't accidentally apply Theme styles
+					to this markup.
+				--->
+				<table role="presentation" width="100%" border="0" cellpadding="13" cellspacing="0">
 				<tr>
 					<td class="#trim( 'html-entity-blockquote #attributes.class#' )#" style="#inlineStyle#">
 						#thistag.generatedContent#

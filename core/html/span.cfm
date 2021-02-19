@@ -25,7 +25,7 @@
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
 			</core:Styles>
-			
+
 			<span
 				class="#trim( 'html-entity-span #attributes.class#' )#"
 				style="#inlineStyle#"
