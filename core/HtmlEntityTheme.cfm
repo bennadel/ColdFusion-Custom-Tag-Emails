@@ -26,7 +26,7 @@
 
 						classVariableName = "#themeVariableName#.#className#";
 
-						prefixContent = parentTag.keyExists( classVariableName )
+						prefixContent = structKeyExists( parentTag, classVariableName )
 							? ( ";" & parentTag[ classVariableName ] )
 							: ""
 						;
@@ -37,7 +37,7 @@
 
 				} else {
 
-					prefixContent = parentTag.keyExists( themeVariableName )
+					prefixContent = structKeyExists( parentTag, themeVariableName )
 						? ( ";" & parentTag[ themeVariableName ] )
 						: ""
 					;
@@ -67,7 +67,7 @@
 		{
 
 		// The 1st tag is the current tag. We have to go above it.
-		return( arguments.tagList.listGetAt( 2 ) );
+		return( listGetAt( arguments.tagList, 2 ) );
 
 	}
 
@@ -82,7 +82,7 @@
 		cachedWithin = "request"
 		{
 
-		return( arguments.value.reMatch( "\S+" ) );
+		return( reMatch( "\S+", arguments.value ) );
 
 	}
 

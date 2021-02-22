@@ -39,7 +39,7 @@
 		cachedWithin = "request"
 		{
 
-		return( value.reReplace( """", "'", "all" ) );
+		return( reReplace( arguments.value, """", "'", "all" ) );
 
 	}
 
@@ -60,7 +60,7 @@
 		required string entityStyle
 		) {
 
-		var blocks = gatherCascadingStyles(
+		var blocks = variables.gatherCascadingStyles(
 			arguments.entityStyleBlock,
 			arguments.entityName,
 			arguments.entityClass,
@@ -78,7 +78,7 @@
 		// order to compile the unique list of CSS properties with proper overrides.
 		for ( var block in blocks ) {
 
-			structAppend( uniqueProperties, parseBlock( block ) );
+			structAppend( uniqueProperties, variables.parseBlock( block ) );
 
 		}
 
@@ -106,7 +106,7 @@
 
 			if ( key == "font-family" ) {
 
-				fontFamilyLine = "#key#:#cleanFontFamilyValue( uniqueProperties[ key ] )#; ";
+				fontFamilyLine = "#key#:#variables.cleanFontFamilyValue( uniqueProperties[ key ] )#; ";
 
 			} else if ( key == "mso-line-height-rule" ) {
 
@@ -114,16 +114,18 @@
 
 			} else {
 
-				uniquePropertyLines.append( "#key#:#uniqueProperties[ key ]#;" );
+				arrayAppend( uniquePropertyLines, "#key#:#uniqueProperties[ key ]#;" );
 
 			}
 
 		}
 
 		return(
-			fontFamilyLine &
-			msoLineHeightRule &
-			uniquePropertyLines.toList( " " )
+			trim(
+				fontFamilyLine &
+				msoLineHeightRule &
+				arrayToList( uniquePropertyLines, " " )
+			)
 		);
 
 	}
@@ -153,15 +155,15 @@
 		// it comes to runtime styling (meaning, higher-up styles can be overridden by
 		// lower-down styles). That said, we only need to do this IF we have an entity
 		// tag-name (as this is what defines the theme-variables).
-		if ( arguments.entityName.len() ) {
+		if ( len( arguments.entityName ) ) {
 
-			var classNames = splitClassNames( arguments.entityClass );
+			var classNames = variables.splitClassNames( arguments.entityClass );
 			var themeVariableName = "$$entity:theme:#arguments.entityName#";
 
 			loop
 				index = "local.i"
 				value = "local.tagName"
-				array = splitBaseTagList( getBaseTagList() )
+				array = variables.splitBaseTagList( getBaseTagList() )
 				{
 				
 				var parentTag = getBaseTagData( tagName, ( i - 1 ) );
@@ -173,18 +175,18 @@
 
 					var themeClassVariableName = "#themeVariableName#.#className#";
 
-					if ( arguments.entityClass.len() && parentTag.keyExists( themeClassVariableName ) ) {
+					if ( len( arguments.entityClass ) && structKeyExists( parentTag, themeClassVariableName ) ) {
 
-						styleBlocks.prepend( parentTag[ themeClassVariableName ] );
+						arrayPrepend( styleBlocks, parentTag[ themeClassVariableName ] );
 
 					}
 
 				}
 
 				// After the class-based styles are added, check for tag-based styles.
-				if ( parentTag.keyExists( themeVariableName ) ) {
+				if ( structKeyExists( parentTag, themeVariableName ) ) {
 
-					styleBlocks.prepend( parentTag[ themeVariableName ] );
+					arrayPrepend( styleBlocks, parentTag[ themeVariableName ] );
 
 				}
 
@@ -194,13 +196,13 @@
 
 		// The entity styles have the next-to-highest precedence, being overridden only
 		// by the optional inline styles.
-		styleBlocks.append( arguments.entityStyleBlock );
+		arrayAppend( styleBlocks, arguments.entityStyleBlock );
 
 		// The inline styles need to have the highest precedent, so they need to be added
 		// to the end of the style blocks.
-		if ( arguments.entityStyle.len() ) {
+		if ( len( arguments.entityStyle ) ) {
 
-			styleBlocks.append( arguments.entityStyle );
+			arrayAppend( styleBlocks, arguments.entityStyle );
 
 		}
 
@@ -220,9 +222,9 @@
 
 		var blockProperties = [:];
 
-		for ( var line in splitBlock( arguments.block ) ) {
+		for ( var line in variables.splitBlock( arguments.block ) ) {
 
-			var parts = parseLine( line );
+			var parts = variables.parseLine( line );
 
 			if ( parts.isValid ) {
 
@@ -246,14 +248,13 @@
 		cachedWithin = "request"
 		{
 
-		var name = arguments.line.listFirst( ":" ).trim().lcase();
-		var value = arguments.line.listRest( ":" )
-			.trim()
-			// Remove spaces around commas.
-			.reReplace( "\s*,\s*", ",", "all" )
-			// Normalize all spaces down to a single space.
-			.reReplace( "\s+", " ", "all" )
-		;
+		var name = lcase( trim( listFirst( arguments.line, ":" ) ) );
+		var value = trim( listRest( arguments.line, ":" ) );
+
+		// Remove spaces around commas.
+		value = reReplace( value, "\s*,\s*", ",", "all" );
+		// Normalize all spaces down to a single space.
+		value = reReplace( value, "\s+", " ", "all" );
 
 		return({
 			name: name,
@@ -273,7 +274,7 @@
 		cachedWithin = "request"
 		{
 
-		var tagNames = arguments.value.listToArray().filter(
+		var tagNames = listToArray( arguments.value ).filter(
 			( tagName ) => {
 
 				// Some ColdFusion custom tags appear to be implemented as pseudo-custom
@@ -281,6 +282,7 @@
 				// these internal tags from the list otherwise our getBaseTagData() calls
 				// will blow-up.
 				return(
+					( arguments.tagName != "cfmodule" ) &&
 					( arguments.tagName != "cfsavecontent" ) &&
 					( arguments.tagName != "cfsilent" ) &&
 					( arguments.tagName != "cftimer" )
@@ -303,7 +305,7 @@
 		cachedWithin = "request"
 		{
 
-		return( arguments.value.listToArray( ";" ) );
+		return( listToArray( arguments.value, ";" ) );
 
 	}
 
@@ -318,7 +320,7 @@
 		cachedWithin = "request"
 		{
 
-		return( arguments.value.reMatch( "\S+" ) );
+		return( reMatch( "\S+", arguments.value ) );
 
 	}
 

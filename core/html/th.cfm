@@ -84,11 +84,11 @@
 		cachedWithin = "request"
 		{
 
-		var matches = arguments.styleBlock.reMatchNoCase( "background-color:\s*##[0-9a-f]{6}\b" );
+		var matches = reMatchNoCase( "background-color:\s*##[0-9a-f]{6}\b", arguments.styleBlock );
 
-		if ( matches.len() ) {
+		if ( arrayLen( matches ) ) {
 
-			return( matches[ 1 ].right( 7 ) );
+			return( right( matches[ 1 ], 7 ) );
 
 		} else {
 

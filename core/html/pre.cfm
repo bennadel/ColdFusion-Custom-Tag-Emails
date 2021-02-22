@@ -41,8 +41,8 @@
 				replace it back into the body after the email has been minified.
 			--->
 			<cfset email = getBaseTagData( "cf_email" ) />
-			<cfset email.preContentBlocks.append( thistag.generatedContent ) />
-			<cfset preContentBlockToken = "__PRE:#email.preContentBlocks.len()#__" />
+			<cfset arrayAppend( email.preContentBlocks, thistag.generatedContent ) />
+			<cfset preContentBlockToken = "__PRE:#arrayLen( email.preContentBlocks )#__" />
 
 			<core:Styles
 				variable="tdStyle"

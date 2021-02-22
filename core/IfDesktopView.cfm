@@ -66,11 +66,11 @@
 		cachedWithin = "request"
 		{
 
-		var parentTags = arguments.baseTagList.listRest( "," ).listToArray();
+		var parentTags = listToArray( listRest( arguments.baseTagList ) );
 
 		return(
-			parentTags.containsNoCase( "cf_IfDesktopView" ) ||
-			parentTags.containsNoCase( "cf_IfMobileView" )
+			arrayContainsNoCase( parentTags, "cf_IfDesktopView" ) ||
+			arrayContainsNoCase( parentTags, "cf_IfMobileView" )
 		);
 
 	}

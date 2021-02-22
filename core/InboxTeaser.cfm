@@ -12,7 +12,7 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<cfif ! attributes.teaser.len()>
+			<cfif ! len( attributes.teaser )>
 
 				<cfexit method="exitTag" />
 

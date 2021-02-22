@@ -108,14 +108,14 @@
 		CAUTION: We are using raw HTML elements here instead of the "html" custom tags
 		module so that we don't accidentally apply Theme styles to this markup.
 	--->
-	<table aria-hidden="true" role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="#tableStyle#">
+	<table aria-hidden="true" role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="#variables.tableStyle#">
 	<tr>
-		<td style="#tdStyle#">
+		<td style="#variables.tdStyle#">
 			<!---
 				I find that using height on the Table/TD alone doesn't work
 				consistently in AOL. But, wrapping a Div seems to help.
 			--->
-			<div style="#divStyle#">
+			<div style="#variables.divStyle#">
 				&nbsp;<br />
 			</div>
 		</td>

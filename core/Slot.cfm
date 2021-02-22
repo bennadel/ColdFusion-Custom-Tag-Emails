@@ -14,7 +14,7 @@
 
 			if ( attributes.multi ) {
 
-				slots[ attributes.name ].append( thistag.generatedContent );
+				arrayAppend( slots[ attributes.name ], thistag.generatedContent );
 
 			} else {
 
@@ -41,12 +41,12 @@
 		loop
 			index = "local.i"
 			value = "local.tagName"
-			array = splitBaseTagList( getBaseTagList() )
+			array = variables.splitBaseTagList( getBaseTagList() )
 			{
 
 			var parentTag = getBaseTagData( tagName, ( i - 1 ) );
 
-			if ( parentTag.keyExists( "slots" ) ) {
+			if ( structKeyExists( parentTag, "slots" ) ) {
 
 				return( parentTag.slots );
 
@@ -72,7 +72,7 @@
 		cachedWithin = "request"
 		{
 
-		var tagNames = arguments.value.listToArray().filter(
+		var tagNames = listToArray( arguments.value ).filter(
 			( tagName ) => {
 
 				// Some ColdFusion custom tags appear to be implemented as pseudo-custom

@@ -47,7 +47,7 @@
 					<html:table cellpadding="20" margins="none none">
 					<html:tr>
 						<html:td style="#wrapperStyle#">
-							<html:a href="#attributes.href#"  decoration="false" style="#innerLinkStyle#">
+							<html:a href="#attributes.href#" decoration="false" style="#innerLinkStyle#">
 								#thistag.generatedContent#
 							</html:a>
 						</html:td>

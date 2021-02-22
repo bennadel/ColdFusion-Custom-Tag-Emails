@@ -13,7 +13,7 @@
 
 				cacheKey = getCacheKey( thistag.generatedContent );
 
-				if ( request.keyExists( cacheKey ) ) {
+				if ( structKeyExists( request, cacheKey ) ) {
 
 					thistag.generatedContent = "";
 					exit method="exitTag";
@@ -24,10 +24,7 @@
 
 			}
 
-			getBaseTagData( "cf_email" )
-				.headerStyleBlocks
-				.append( thistag.generatedContent )
-			;
+			arrayAppend( getBaseTagData( "cf_email" ).headerStyleBlocks, thistag.generatedContent );
 
 			// This tag doesn't generate output - it only manipulates variables.
 			thistag.generatedContent = "";

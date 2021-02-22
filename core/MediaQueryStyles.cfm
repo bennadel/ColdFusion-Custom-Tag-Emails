@@ -54,7 +54,7 @@
 
 		}
 
-		if ( arguments.content.findNoCase( "!important" ) ) {
+		if ( findNoCase( arguments.content, "!important" ) ) {
 
 			throw(
 				type = "UnexpectedImportant",
@@ -64,7 +64,7 @@
 
 		}
 
-		return( arguments.content.reReplace( "(?m)(;[ \t]*$)", " !important \1", "all" ) );
+		return( reReplace( arguments.content, "(?m)(;[ \t]*$)", " !important \1", "all" ) );
 
 	}
 

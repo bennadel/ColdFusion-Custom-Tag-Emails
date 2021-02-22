@@ -3,7 +3,7 @@
 	output of the ColdFusion custom tag since we don't want to inadvertently add any
 	leading or trailing whitespace around the tag content. As such, we're going to wrap
 	the output in a custom tag that will trim the output.
----><cf__inline_html_element_trimmer>
+---><cfmodule template="../TrimOutput.cfm">
 
 <!--- Import custom tag libraries. --->
 <cfimport prefix="core" taglib="../" />
@@ -39,4 +39,4 @@
 </cfswitch>
 
 <!--- End of fanatical whitespace management. --->
-</cf__inline_html_element_trimmer><cfexit method="exitTemplate" />
+</cfmodule><cfexit method="exitTemplate" />

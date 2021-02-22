@@ -85,7 +85,7 @@
 		<html:div>
 			<html:p>
 				Of course, none of the overrides above should have messed with content
-				that is <html:strong>in</html:strong> <html:em>in</html:em>
+				that is <html:strong>in</html:strong> <html:em>this</html:em>
 				<html:mark>paragraph</html:mark>.
 			</html:p>
 		</html:div>

@@ -3,9 +3,7 @@
 	switch ( thistag.executionMode ) {
 		case "end":
 
-			thistag.generatedContent = thistag.generatedContent
-				.reReplace( "\s+", "&nbsp;", "all" )
-			;
+			thistag.generatedContent = reReplace( thistag.generatedContent, "\s+", "&nbsp;", "all" );
 
 		break;
 	}

@@ -226,6 +226,10 @@
 			<core:HtmlEntityTheme entity="strong">
 				font-weight: 800 ; <!--- For Lotus Notes. --->
 			</core:HtmlEntityTheme>
+			<core:HtmlEntityTheme entity="symbol">
+				font-family: arial, sans-serif ;
+				font-weight: 400 ;
+			</core:HtmlEntityTheme>
 
 		</cfoutput>
 	</cfcase>
@@ -287,7 +291,7 @@
 
 					</cfif>
 
-					<cfif theme.importUrls.len()>
+					<cfif arrayLen( theme.importUrls )>
 
 						<!---
 							Outlook can choke on external font loading. As such, we want
@@ -370,14 +374,14 @@
 							/* text-decoration: none !important ; */
 						}
 
-						<cfif headerStyleBlocks.len()>
-							<cfset writeOutput( headerStyleBlocks.toList( chr( 10 ) ) ) />
+						<cfif arrayLen( headerStyleBlocks )>
+							<cfset writeOutput( arrayToList( headerStyleBlocks, chr( 10 ) ) ) />
 						</cfif>
 
 					</style>
 
-					<cfif headerContentBlocks.len()>
-						#headerContentBlocks.toList( chr( 10 ) )#
+					<cfif arrayLen( headerContentBlocks )>
+						#arrayToList( headerContentBlocks, chr( 10 ) )#
 					</cfif>
 
 					<!--- Needed for property image scaling in some Outlook versions. --->
@@ -440,19 +444,24 @@
 
 		var minifiedContent = trim( arguments.content );
 		// Normalizing line-breaks and spaces.
-		minifiedContent = reReplaceAll( minifiedContent, "(?m)^[ \t]+", "" );
-		minifiedContent = reReplaceAll( minifiedContent, "[\r\n]+", newline );
+		minifiedContent = variables.reReplaceAll( minifiedContent, "(?m)^[ \t]+", "" );
+		minifiedContent = variables.reReplaceAll( minifiedContent, "[\r\n]+", newline );
 		// Wrap each STYLE attribute onto its own line in order to help prevent mid-
 		// style text-wrapping applied by the more stringent email clients.
-		minifiedContent = reReplaceAll( minifiedContent, "(\bstyle="")", "#newline#$1" );
+		minifiedContent = variables.reReplaceAll( minifiedContent, "(\bstyle="")", "#newline#$1" );
 
 		// Now that we've removed all the superfluous whitespace, as the last step in our
 		// minification, let's apply any PRE tag content (which is intended to contain
 		// meaningful whitespace).
-		preContentBlocks.each(
+		variables.preContentBlocks.each(
 			( preContent, i ) => {
 
-				minifiedContent = reReplaceAll( minifiedContent, "__PRE:#i#__", preContent );
+				minifiedContent = variables.reReplaceAll(
+					minifiedContent,
+					"__PRE:#arguments.i#__",
+					arguments.preContent,
+					true
+				);
 
 			}
 		);
@@ -475,8 +484,17 @@
 	public string function reReplaceAll(
 		required string input,
 		required string patternText,
-		required string replacementText
+		required string replacementText,
+		boolean quoteReplacement = false
 		) {
+
+		if ( arguments.quoteReplacement ) {
+
+			arguments.replacementText = createObject( "java", "java.util.regex.Matcher" )
+				.quoteReplacement( arguments.replacementText )
+			;
+
+		}
 
 		var result = javaCast( "string", arguments.input ).replaceAll(
 			javaCast( "string", arguments.patternText ),

@@ -9,46 +9,27 @@
 <cfimport prefix="core" taglib="../" />
 
 <!--- Define custom tag attributes. --->
-<cfparam name="attributes.align" type="string" default="" />
-<cfparam name="attributes.alt" type="string" default="" />
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.height" type="string" />
-<cfparam name="attributes.src" type="string" />
 <cfparam name="attributes.style" type="string" default="" />
-<cfparam name="attributes.width" type="string" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
 
 <cfswitch expression="#thistag.executionMode#">
-	<cfcase value="start">
+	<cfcase value="end">
 		<cfoutput>
 
 			<core:Styles
 				variable="inlineStyle"
-				entityName="img"
+				entityName="symbol"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
 			</core:Styles>
 
-			<img
-				src="#encodeForHtmlAttribute( attributes.src )#"
-				<cfif len( attributes.alt )>
-					alt="#encodeForHtmlAttribute( attributes.alt )#"
-				</cfif>
-				<cfif len( attributes.width )>
-					width="#attributes.width#"
-				</cfif>
-				<cfif len( attributes.height )>
-					height="#attributes.height#"
-				</cfif>
-				<cfif len( attributes.align )>
-					align="#attributes.align#"
-				</cfif>
-				loading="lazy"
-				class="#trim( 'html-entity-img #attributes.class#' )#"
+			<span
+				class="#trim( 'html-entity-symbol #attributes.class#' )#"
 				style="#inlineStyle#"
-			/>
+				>#thistag.generatedContent#</span>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />
