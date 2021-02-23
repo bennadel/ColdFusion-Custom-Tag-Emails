@@ -58,6 +58,7 @@
 					enableDarkModeSupport: false
 				};
 
+				providers = {};
 				headerStyleBlocks = [];
 				headerContentBlocks = [];
 				preContentBlocks = [];

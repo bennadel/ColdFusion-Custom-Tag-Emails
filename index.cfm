@@ -16,37 +16,40 @@
 
 	<ul>
 		<li>
-			<a href="./example1.cfm">Example 1</a>
+			<a href="./example1.cfm">Example 1</a> - Hello world
 		</li>
 		<li>
-			<a href="./example2.cfm">Example 2</a>
+			<a href="./example2.cfm">Example 2</a> - Inline themeing
 		</li>
 		<li>
-			<a href="./example3.cfm">Example 3</a>
+			<a href="./example3.cfm">Example 3</a> - Encapsulated themeing
 		</li>
 		<li>
-			<a href="./example4.cfm">Example 4</a>
+			<a href="./example4.cfm">Example 4</a> - Desktop / mobile layouts
 		</li>
 		<li>
-			<a href="./example5.cfm">Example 5</a>
+			<a href="./example5.cfm">Example 5</a> - Media queries
 		</li>
 		<li>
-			<a href="./example6.cfm">Example 6</a>
+			<a href="./example6.cfm">Example 6</a> - Dark mode
 		</li>
 		<li>
-			<a href="./example7.cfm">Example 7</a>
+			<a href="./example7.cfm">Example 7</a> - Multi-slot projection
 		</li>
 		<li>
-			<a href="./example8.cfm">Example 8</a>
+			<a href="./example8.cfm">Example 8</a> - Encapsulation technqiues
 		</li>
 		<li>
-			<a href="./example9.cfm">Example 9</a>
+			<a href="./example9.cfm">Example 9</a> - Comment email
 		</li>
 		<li>
-			<a href="./example10.cfm">Example 10</a>
+			<a href="./example10.cfm">Example 10</a> - Code snippets
 		</li>
 		<li>
-			<a href="./example11.cfm">Example 11</a>
+			<a href="./example11.cfm">Example 11</a> - Symbols
+		</li>
+		<li>
+			<a href="./example12.cfm">Example 12</a> - Providers
 		</li>
 	</ul>
 

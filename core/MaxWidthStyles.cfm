@@ -4,6 +4,7 @@
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.injectImportant" type="boolean" default="true" />
+<cfparam name="attributes.runOnce" type="boolean" default="true" />
 <cfparam name="attributes.width" type="numeric" default="0" />
 
 <!--- // ------------------------------------------------------------------------- // --->
@@ -19,7 +20,8 @@
 			<core:MediaQueryStyles
 				name="max-width"
 				value="#width#px"
-				injectImportant="#attributes.injectImportant#">
+				injectImportant="#attributes.injectImportant#"
+				runOnce="#attributes.runOnce#">
 				#thistag.generatedContent#
 			</core:MediaQueryStyles>
 

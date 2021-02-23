@@ -4,6 +4,7 @@
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.injectImportant" type="boolean" default="true" />
+<cfparam name="attributes.runOnce" type="boolean" default="true" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -18,7 +19,8 @@
 			<core:MediaQueryStyles
 				name="prefers-color-scheme"
 				value="dark"
-				injectImportant="#attributes.injectImportant#">
+				injectImportant="#attributes.injectImportant#"
+				runOnce="#attributes.runOnce#">
 				#thistag.generatedContent#
 			</core:MediaQueryStyles>
 
