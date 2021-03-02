@@ -12,7 +12,7 @@
 
 			<cfset email = getBaseTagData( "cf_email" ) />
 			<!---
-				In order to access the deifned providers, I just have to reach up into
+				In order to access the defined providers, I just have to reach up into
 				the base "email" tag and grab the Providers struct. The same way I do
 				for the theme data.
 			--->
