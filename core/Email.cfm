@@ -105,7 +105,7 @@
 			<cfmodule template="./HtmlEntityTheme.cfm" entity="h1, h2, h3, h4, h5, th">
 				color: #theme.light.onSurface# ;
 				font-family: garamond, georgia, serif ;
-				font-weight: 800 ;
+				font-weight: 700 ;
 			</cfmodule>
 			<cfmodule template="./HtmlEntityTheme.cfm" entity="h1">
 				font-size: 32px ;
@@ -221,7 +221,7 @@
 			<cfmodule template="./HtmlEntityTheme.cfm" entity="mark">
 				background-color: yellow ;
 				display: inline-block ;
-				font-weight: 800 ;
+				font-weight: 700 ;
 				padding: 0px 4px 0px 4px ;
 			</cfmodule>
 			<cfmodule template="./HtmlEntityTheme.cfm" entity="pre">
@@ -234,7 +234,7 @@
 				text-decoration: line-through ;
 			</cfmodule>
 			<cfmodule template="./HtmlEntityTheme.cfm" entity="strong">
-				font-weight: 800 ; <!--- For Lotus Notes. --->
+				font-weight: 700 ; <!--- For Lotus Notes. --->
 			</cfmodule>
 			<cfmodule template="./HtmlEntityTheme.cfm" entity="symbol">
 				font-family: arial, sans-serif ;
