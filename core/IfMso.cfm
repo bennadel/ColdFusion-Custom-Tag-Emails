@@ -4,7 +4,7 @@
 --->
 
 <!--- Define custom tag attributes. --->
-<cfparam name="attributes.gte" type="string" default="" />
+<cfparam name="attributes.gteVersion" type="string" default="" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -13,8 +13,8 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<cfif len( attributes.gte )>
-				<!--[if gte mso #attributes.gte#]>
+			<cfif len( attributes.gteVersion )>
+				<!--[if gte mso #attributes.gteVersion#]>
 			<cfelse>
 				<!--[if mso]>
 			</cfif>

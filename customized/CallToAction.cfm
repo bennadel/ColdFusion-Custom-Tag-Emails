@@ -6,7 +6,7 @@
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.color" type="string" default="pink" />
 <cfparam name="attributes.href" type="string" />
-<cfparam name="attributes.margins" type="string" default="normal xlarge" />
+<cfparam name="attributes.margins" type="string" default="normal" />
 
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
@@ -44,7 +44,7 @@
 					NOTE: "cellpadding" is needed for Lotus Notes.
 				--->
 				<html:a href="#attributes.href#" decoration="false" style="#outerLinkStyle#">
-					<html:table cellpadding="20" margins="none none">
+					<html:table align="center" cellpadding="20" margins="none none">
 					<html:tr>
 						<html:td style="#wrapperStyle#">
 							<html:a href="#attributes.href#" decoration="false" style="#innerLinkStyle#">

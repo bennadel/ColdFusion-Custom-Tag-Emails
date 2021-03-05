@@ -58,18 +58,18 @@
 			Oh the memories! To see more wonderful people, check out my People section.
 		</html:p>
 
-		<customized:CallToAction href="https://www.bennadel.com/people" margins="large large">
+		<customized:CallToAction href="https://www.bennadel.com/people" margins="normal">
 			See More People
 		</customized:CallToAction>
 
-		<html:hr margins="large xlarge" />
+		<html:hr margins="double" />
 
 		<html:p>
 			The following is just a bunch of random style stuff to experiment with and
 			to see how this all renders in email clients.
 		</html:p>
 
-		<html:h1 margins="normal xlarge">
+		<html:h1>
 			Favorite movies
 		</html:h1>
 

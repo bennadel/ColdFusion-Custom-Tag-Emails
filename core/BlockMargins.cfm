@@ -1,7 +1,4 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.margins" type="string" default="none normal" />
 
@@ -13,12 +10,12 @@
 
 		<cfset margins = splitMargins( attributes.margins ) />
 
-		<core:Margin size="#arrayFirst( margins )#" />
+		<cfmodule template="./Margin.cfm" size="#arrayFirst( margins )#">
 
 	</cfcase>
 	<cfcase value="end">
 
-		<core:Margin size="#arrayLast( margins )#" />
+		<cfmodule template="./Margin.cfm" size="#arrayLast( margins )#">
 
 	</cfcase>
 </cfswitch>

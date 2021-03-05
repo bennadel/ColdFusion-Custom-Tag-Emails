@@ -1,10 +1,7 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="../" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.margins" type="string" default="none none" />
+<cfparam name="attributes.margins" type="string" default="none" />
 <cfparam name="attributes.style" type="string" default="" />
 
 <!--- // ------------------------------------------------------------------------- // --->
@@ -14,14 +11,15 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<core:Styles
+			<cfmodule
+				template="../Styles.cfm"
 				variable="inlineStyle"
 				entityName="div"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-			</core:Styles>
+			</cfmodule>
 
-			<core:BlockMargins margins="#attributes.margins#">
+			<cfmodule template="../BlockMargins.cfm" margins="#attributes.margins#">
 
 				<div
 					class="#trim( 'html-entity-div #attributes.class#' )#"
@@ -29,7 +27,7 @@
 					#thistag.generatedContent#
 				</div>
 
-			</core:BlockMargins>
+			</cfmodule>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

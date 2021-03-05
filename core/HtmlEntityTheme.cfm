@@ -12,11 +12,7 @@
 
 			parentTag = getBaseTagData( getParentTagName( getBaseTagList() ) );
 
-			loop
-				value = "entityName"
-				list = attributes.entity
-				delimiters = ", "
-				{
+			for ( entityName in splitEntityNames( attributes.entity ) ) {
 
 				themeVariableName = "$$entity:theme:#entityName#";
 
@@ -66,14 +62,35 @@
 		cachedWithin = "request"
 		{
 
+		var tagNames = listToArray( arguments.tagList );
+		var tagNameCount = arrayLen( tagNames );
+
 		// The 1st tag is the current tag. We have to go above it.
-		return( listGetAt( arguments.tagList, 2 ) );
+		for ( var i = 2 ; i <= tagNameCount ; i++ ) {
+
+			var tagName = tagNames[ i ];
+
+			// Some ColdFusion custom tags appear to be implemented as pseudo-custom
+			// tags that don't actually expose any state. As such, we have to omit
+			// these internal tags from the list otherwise our getBaseTagData() calls
+			// will blow-up.
+			if (
+				( tagName != "cfmodule" ) &&
+				( tagName != "cfsavecontent" ) &&
+				( tagName != "cfsilent" ) &&
+				( tagName != "cftimer" )
+				) {
+
+				return( tagName );
+			}
+
+		}
 
 	}
 
 
 	/**
-	* I take the given class value (which is a space-delimited list of classes) splits it
+	* I take the given class value (which is a delimited list of classes) and splits it
 	* up and returns the array of class name tokens.
 	* 
 	* @value I am the class value being split.
@@ -83,6 +100,21 @@
 		{
 
 		return( reMatch( "\S+", arguments.value ) );
+
+	}
+
+
+	/**
+	* I take the given entity value (which is a delimited list of entity names) and
+	* splits it up and returns the array of entity name tokens.
+	* 
+	* @value I am the entity value being split.
+	*/
+	public array function splitEntityNames( required string value )
+		cachedWithin = "request"
+		{
+
+		return( listToArray( arguments.value, ", " ) );
 
 	}
 

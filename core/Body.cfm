@@ -1,6 +1,5 @@
 
 <!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
 <cfimport prefix="html" taglib="./html/" />
 
 <!--- // ------------------------------------------------------------------------- // --->
@@ -12,10 +11,10 @@
 
 			<cfset theme = getBaseTagData( "cf_email" ).theme />
 
-			<core:HtmlEntityTheme entity="td" class="email-body-content">
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="td" class="email-body-content">
 				padding: 30px 0px 30px 0px ;
-			</core:HtmlEntityTheme>
-			<core:MaxWidthStyles>
+			</cfmodule>
+			<cfmodule template="./MaxWidthStyles.cfm">
 				.email-body-wrapper {
 					width: 100% ;
 				}
@@ -27,9 +26,9 @@
 				.email-body-content {
 					padding: 20px 0px 20px 0px ;
 				}
-			</core:MaxWidthStyles>
+			</cfmodule>
 
-			<html:table width="#theme.width#" class="email-body-wrapper">
+			<html:table width="#theme.width#" align="center" class="email-body-wrapper">
 			<html:tr>
 				<html:td width="30" class="email-body-gutter">
 					<!--- Left margin. ---><br />
@@ -45,7 +44,7 @@
 			</html:tr>
 			</html:table>
 
-			<core:Margin size="large" />
+			<cfmodule template="./Margin.cfm" size="normal" />
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

@@ -1,8 +1,4 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
-<cfimport prefix="html" taglib="./html/" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.subject" type="string" default="" />
 <cfparam name="attributes.teaser" type="string" default="" />
@@ -58,7 +54,20 @@
 					enableDarkModeSupport: false
 				};
 
-				providers = {};
+				providers = {
+					"margins.blockquote": "none normal",
+					"margins.h1": "none normal",
+					"margins.h2": "none normal",
+					"margins.h3": "none normal",
+					"margins.h4": "none normal",
+					"margins.h5": "none normal",
+					"margins.hr": "none normal",
+					"margins.ol": "none normal",
+					"margins.p": "none normal",
+					"margins.pre": "none normal",
+					"margins.table": "none normal",
+					"margins.ul": "none normal"
+				};
 				headerStyleBlocks = [];
 				headerContentBlocks = [];
 				preContentBlocks = [];
@@ -93,160 +102,149 @@
 					</core:IfMso>
 				</core:HeaderContent>
 			--->
-			<core:HtmlEntityTheme entity="h1, h2, h3, h4, h5, th">
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="h1, h2, h3, h4, h5, th">
 				color: #theme.light.onSurface# ;
 				font-family: garamond, georgia, serif ;
 				font-weight: 800 ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="h1">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="h1">
 				font-size: 32px ;
 				line-height: 40px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="h2">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="h2">
 				font-size: 28px ;
 				line-height: 36px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="h3">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="h3">
 				font-size: 24px ;
 				line-height: 32px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="h4">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="h4">
 				font-size: 20px ;
 				line-height: 28px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="h5, th">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="h5, th">
 				font-size: 18px ;
 				line-height: 26px ;
-			</core:HtmlEntityTheme>
+			</cfmodule>
 			<!--- IMG being included for the ALT text if the image doesn't load. --->
-			<core:HtmlEntityTheme entity="blockquote, img, li, p, td">
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="blockquote, img, li, p, td">
 				color: #theme.light.onSurface# ;
 				font-family: helvetica, arial, sans-serif ;
 				font-size: 18px ;
 				font-weight: 400 ;
 				line-height: 25px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="a">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="a">
 				color: #theme.light.primary# ;
-			</core:HtmlEntityTheme>
+			</cfmodule>
 			<!---
 				While CODE is an inline tag, we need to include the font-size or some
 				older Outlook clients will make the font-size really small.
 			--->
-			<core:HtmlEntityTheme entity="code, pre">
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="code, pre">
 				font-family: consolas, monaco, monospace ;
 				font-size: 18px ;
 				line-height: 25px ;
-			</core:HtmlEntityTheme>
+			</cfmodule>
 
 			<!---
 				Next, setup the resets. These are supposed to normalize the elements
 				across all the clients, mostly removing margins and paddings.
 			--->
-			<core:HtmlEntityTheme entity="a">
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="a">
 				text-decoration: underline ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, hr, img, p, pre">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="blockquote, div, h1, h2, h3, h4, h5, hr, img, p, pre">
 				Margin: 0 ; <!--- For Outlook. --->
 				margin: 0px ;
 				padding: 0px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, hr, li, img, p, pre, td, th">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="blockquote, div, h1, h2, h3, h4, h5, hr, li, img, p, pre, td, th">
 				mso-line-height-rule: exactly ; <!--- For Outlook. --->
-			</core:HtmlEntityTheme>
+			</cfmodule>
 			<!---
 				In Outlook on Windows, having a line-height on a content container will
 				cause images to be clipped according to the line-height. If you are going
 				to include an image in a content container, you need to "reset" the line-
 				height value for that container.
 			--->
-			<core:HtmlEntityTheme entity="blockquote, div, h1, h2, h3, h4, h5, li, p, td, th" class="html-entity-line-height-reset">
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="blockquote, div, h1, h2, h3, h4, h5, li, p, td, th" class="html-entity-line-height-reset">
 				line-height: unset ;
 				mso-line-height-rule: at-least ; <!--- For Outlook. --->
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="ol, ul">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="ol, ul">
 				Margin-bottom: 0 ; <!--- For Outlook. --->
 				margin-bottom: 0px ;
 				Margin-top: 0 ; <!--- For Outlook. --->
 				margin-top: 0px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="li">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="li">
 				Margin-bottom: 3px ; <!--- For Outlook. --->
 				margin-bottom: 3px ;
 				Margin-top: 3px ; <!--- For Outlook. --->
 				margin-top: 3px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="td, th">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="td, th">
 				padding: 0px ;
-			</core:HtmlEntityTheme>
+			</cfmodule>
 
 			<!---
 				Finally, setup whatever other entity-specific styles we need that weren't
 				covered in the core styles and the resets.
 			--->
-			<core:HtmlEntityTheme entity="blockquote">
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="blockquote">
 				border-left: 4px solid ##cccccc ;
 				font-style: italic ;
-				padding: 5px 20px 5px 30px ;
-			</core:HtmlEntityTheme>
+				padding: 5px 20px 5px 20px ;
+			</cfmodule>
 			<!--- I borrowed whatever MDN uses on their website for CODE styles. --->
-			<core:HtmlEntityTheme entity="code">
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="code">
 				background-color: ##eeeeee ;
 				border-radius: 2px 2px 2px 2px ;
 				box-decoration-break: clone ;
 					-webkit-box-decoration-break: clone ;
 				padding: 0px 3px 0px 3px ;
-			</core:HtmlEntityTheme>
+			</cfmodule>
 			<!--- DIV: No base styles. --->
-			<core:HtmlEntityTheme entity="em">
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="em">
 				font-style: italic ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="hr">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="hr">
 				border-top: 1px solid ##cccccc ;
 				font-size: 1px ;
 				line-height: 1px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="img">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="img">
 				border: none ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="mark">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="mark">
 				background-color: yellow ;
 				display: inline-block ;
 				font-weight: 800 ;
 				padding: 0px 4px 0px 4px ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="pre">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="pre">
 				background-color: ##eeeeee ;
 				border: 1px solid ##cccccc ;
 				padding: 10px 13px 10px 13px ;
 				tab-size: 4 ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="strike">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="strike">
 				text-decoration: line-through ;
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="strong">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="strong">
 				font-weight: 800 ; <!--- For Lotus Notes. --->
-			</core:HtmlEntityTheme>
-			<core:HtmlEntityTheme entity="symbol">
+			</cfmodule>
+			<cfmodule template="./HtmlEntityTheme.cfm" entity="symbol">
 				font-family: arial, sans-serif ;
 				font-weight: 400 ;
-			</core:HtmlEntityTheme>
+			</cfmodule>
 
 		</cfoutput>
 	</cfcase>
 	<cfcase value="end">
 		<cfoutput>
-
-			<core:Styles variable="bodyStyle">
-				Margin: 0 ; <!--- For Outlook. --->
-				margin: 0px ;
-				padding: 0px ;
-				width: 100% ;
-			</core:Styles>
-			<core:Styles variable="articleStyle">
-				-ms-text-size-adjust: 100%;
-				-webkit-text-size-adjust: 100% ;
-			</core:Styles>
 
 			<cfsavecontent variable="emailContent">
 
@@ -270,9 +268,9 @@
 					</cfif>
 
 					<!--- We need to hide this from Windows Live Mail. --->
-					<core:IfNotMso>
+					<cfmodule template="./IfNotMso.cfm">
 						<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-					</core:IfNotMso>
+					</cfmodule>
 
 					<meta name="x-apple-disable-message-reformatting" />
 					<meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no" />
@@ -303,7 +301,7 @@
 							CAUTION: The fallback style block has to be in the email-
 							specific Body since we won't know what default fonts to use.
 						--->
-						<core:IfNotMso>
+						<cfmodule template="./IfNotMso.cfm">
 
 							<cfloop value="importUrl" array="#theme.importUrls#">
 								<style type="text/css">
@@ -311,7 +309,7 @@
 								</style>
 							</cfloop>
 
-						</core:IfNotMso>					
+						</cfmodule>					
 
 					</cfif>
 
@@ -386,7 +384,7 @@
 					</cfif>
 
 					<!--- Needed for property image scaling in some Outlook versions. --->
-					<core:IfMso gte="9">
+					<cfmodule template="./IfMso.cfm" gteVersion="9">
 						<noscript>
 							<xml>
 								<o:OfficeDocumentSettings>
@@ -395,11 +393,23 @@
 								</o:OfficeDocumentSettings>
 							</xml>
 						</noscript>
-					</core:IfMso>
+					</cfmodule>
 				</head>
+
+				<cfmodule template="./Styles.cfm" variable="bodyStyle">
+					Margin: 0 ; <!--- For Outlook. --->
+					margin: 0px ;
+					padding: 0px ;
+					width: 100% ;
+				</cfmodule>
+				<cfmodule template="./Styles.cfm" variable="articleStyle">
+					-ms-text-size-adjust: 100%;
+					-webkit-text-size-adjust: 100% ;
+				</cfmodule>
+
 				<body class="email-body" style="#bodyStyle#">
 
-					<core:InboxTeaser teaser="#attributes.teaser#" />
+					<cfmodule template="./InboxTeaser.cfm" teaser="#attributes.teaser#" />
 
 					<div
 						role="article"

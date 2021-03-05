@@ -60,7 +60,7 @@
 				}
 			</core:MaxWidthStyles>
 
-			<html:table width="#theme.width#" class="ex12-body">
+			<html:table width="#theme.width#" align="center" class="ex12-body">
 			<html:tr>
 				<html:td colspan="3" class="ex12-body-top-border">
 					<br />

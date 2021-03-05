@@ -56,7 +56,7 @@
 
 			<ex9:ReplyAboveLine />
 
-			<html:table width="#theme.width#" class="e9-body">
+			<html:table width="#theme.width#" align="center" class="e9-body">
 			<html:tr>
 				<html:td colspan="3" class="e9-body-top-border">
 					<br />

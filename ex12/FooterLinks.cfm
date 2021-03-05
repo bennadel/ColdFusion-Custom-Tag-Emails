@@ -36,7 +36,7 @@
 				}
 			</core:HeaderStyles>
 
-			<html:p margins="large none" class="secondary-footer">
+			<html:p margins="normal none" class="secondary-footer">
 				<html:a href="#providers.siteUrl#">Ben Nadel</html:a>
 				<html:span>&nbsp;|&nbsp;</html:span>
 				<html:a href="#providers.aboutUrl#">About</html:a>

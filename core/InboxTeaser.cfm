@@ -1,7 +1,4 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.teaser" type="string" default="" />
 
@@ -18,7 +15,7 @@
 
 			</cfif>
 
-			<core:Styles variable="divStyles">
+			<cfmodule template="./Styles.cfm" variable="divStyles">
 				display: none ;
 				font-size: 0px ;
 				height: 0px ;
@@ -31,7 +28,7 @@
 				overflow: hidden ;
 				visibility: hidden ;
 				width: 0px ;
-			</core:Styles>
+			</cfmodule>
 
 			<!---
 				CAUTION: We are using raw HTML elements here instead of the "html"

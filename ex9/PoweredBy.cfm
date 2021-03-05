@@ -26,11 +26,11 @@
 				text-align: center ;
 			</core:HtmlEntityTheme>
 
-			<html:h3 margins="large xxsmall">
+			<html:h3 margins="normal quarter">
 				Powered by InVision
 			</html:h3>
 
-			<html:h4 margins="none xxlarge">
+			<html:h4 margins="none double">
 				The Digital Product Design Platform
 			</html:h4>
 

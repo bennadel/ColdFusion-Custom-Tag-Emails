@@ -49,7 +49,7 @@
 			</core:HtmlEntityTheme>
 
 			<!--- NOTE: Including cellpadding for older email clients. --->
-			<html:table cellpadding="10" margins="#attributes.margins#" class="ex8-image-tile">
+			<html:table align="center" cellpadding="10" margins="#attributes.margins#" class="ex8-image-tile">
 			<html:tr>
 				<html:td class="html-entity-line-height-reset">
 
@@ -59,7 +59,7 @@
 
 					<cfif len( attributes.caption )>
 						
-						<html:p margins="small none">
+						<html:p margins="half none">
 							#encodeForHtml( attributes.caption )#
 						</html:p>
 

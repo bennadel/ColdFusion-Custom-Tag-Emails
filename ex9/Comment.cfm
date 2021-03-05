@@ -7,7 +7,7 @@
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.commentCreatedAt" type="date" />
 <cfparam name="attributes.commentText" type="string" />
-<cfparam name="attributes.margins" type="string" default="none xlarge" />
+<cfparam name="attributes.margins" type="string" default="none 20" />
 <cfparam name="attributes.userAvatarUrl" type="string" default="" />
 <cfparam name="attributes.userInitials" type="string" />
 <cfparam name="attributes.userName" type="string" />
@@ -74,7 +74,7 @@
 				</html:td>
 				<html:td width="100%" class="comment-container">
 
-					<html:h3 margins="none xxsmall">
+					<html:h3 margins="none half">
 						#encodeForHtml( attributes.userName )#
 
 						<html:span class="created-at">

@@ -1,10 +1,10 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="../" />
+<!--- Get default margins for entity. --->
+<cfset entityMargins = getBaseTagData( "cf_email" ).providers[ "margins.pre" ] />
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.margins" type="string" default="small xlarge" />
+<cfparam name="attributes.margins" type="string" default="#entityMargins#" />
 <cfparam name="attributes.style" type="string" default="" />
 <cfparam name="attributes.tabSize" type="string" default="4" />
 
@@ -19,14 +19,14 @@
 				Since the "code" entity has some base styles, we need to unset some of
 				them for use in the "pre" tag.
 			--->
-			<core:HtmlEntityTheme entity="code">
+			<cfmodule template="../HtmlEntityTheme.cfm" entity="code">
 				background-color: transparent ;
 				border-radius: 0px ;
 				display: block ;
 				padding: 0px ;
 				white-space: pre-wrap ;
 				word-break: break-all ;
-			</core:HtmlEntityTheme>
+			</cfmodule>
 
 		</cfoutput>
 	</cfcase>
@@ -44,22 +44,23 @@
 			<cfset arrayAppend( email.preContentBlocks, thistag.generatedContent ) />
 			<cfset preContentBlockToken = "__PRE:#arrayLen( email.preContentBlocks )#__" />
 
-			<core:Styles
+			<cfmodule
+				template="../Styles.cfm"
 				variable="tdStyle"
 				entityName="pre"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
 				tab-size: #attributes.tabSize# ;
-			</core:Styles>
-			<core:Styles variable="nativePreStyle">
+			</cfmodule>
+			<cfmodule template="../Styles.cfm" variable="nativePreStyle">
 				Margin: 0 ; <!--- For Outlook. --->
 				margin: 0px ;
 				padding: 0px ;
 				white-space: pre-wrap ;
 				word-break: break-all ;
-			</core:Styles>
+			</cfmodule>
 
-			<core:BlockMargins margins="#attributes.margins#">
+			<cfmodule template="../BlockMargins.cfm" margins="#attributes.margins#">
 
 				<!---
 					CAUTION: We are using raw HTML elements here instead of the "html"
@@ -74,7 +75,7 @@
 				</tr>
 				</table>
 
-			</core:BlockMargins>
+			</cfmodule>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

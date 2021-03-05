@@ -1,10 +1,10 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="../" />
+<!--- Get default margins for entity. --->
+<cfset entityMargins = getBaseTagData( "cf_email" ).providers[ "margins.ul" ] />
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.margins" type="string" default="none normal" />
+<cfparam name="attributes.margins" type="string" default="#entityMargins#" />
 <cfparam name="attributes.style" type="string" default="" />
 <cfparam name="attributes.type" type="string" default="disc" />
 
@@ -15,14 +15,15 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<core:Styles
+			<cfmodule
+				template="../Styles.cfm"
 				variable="inlineStyle"
 				entityName="ul"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-			</core:Styles>
+			</cfmodule>
 
-			<core:BlockMargins margins="#attributes.margins#">
+			<cfmodule template="../BlockMargins.cfm" margins="#attributes.margins#">
 
 				<ul
 					type="#attributes.type#"
@@ -31,7 +32,7 @@
 					#thistag.generatedContent#
 				</ul>
 
-			</core:BlockMargins>
+			</cfmodule>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

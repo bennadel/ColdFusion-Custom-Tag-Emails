@@ -1,7 +1,4 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.maxWidth" type="numeric" default="0" />
 
@@ -26,11 +23,11 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<core:MaxWidthStyles width="#attributes.maxWidth#">
+			<cfmodule template="./MaxWidthStyles.cfm" width="#attributes.maxWidth#">
 				.email-if-desktop-view-wrapper {
 					display: none ;
 				}
-			</core:MaxWidthStyles>
+			</cfmodule>
 
 			<!---
 				CAUTION: We are using raw HTML elements here instead of the "html"

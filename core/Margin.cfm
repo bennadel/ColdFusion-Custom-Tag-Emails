@@ -1,7 +1,4 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.size" type="string" default="normal" />
 
@@ -34,40 +31,22 @@
 <!--- // ------------------------------------------------------------------------- // --->
 <!--- // ------------------------------------------------------------------------- // --->
 
-<cffunction name="generateSpacerTable" output="true" cachedwithin="request">
+<cffunction name="generateSpacerTable" output="true" cachedwithin="#createTimeSpan( 1, 0, 0, 0 )#">
 
 	<cfargument name="size" type="string" required="true" />
 
 	<cfswitch expression="#arguments.size#">
-		<cfcase value="xxxsmall">
-			<cfset var height = "2px" />
-		</cfcase>
-		<cfcase value="xxsmall">
+		<cfcase value="quarter">
 			<cfset var height = "4px" />
 		</cfcase>
-		<cfcase value="xsmall">
+		<cfcase value="half">
 			<cfset var height = "8px" />
-		</cfcase>
-		<cfcase value="small">
-			<cfset var height = "12px" />
 		</cfcase>
 		<cfcase value="normal">
 			<cfset var height = "16px" />
 		</cfcase>
-		<cfcase value="large">
-			<cfset var height = "20px" />
-		</cfcase>
-		<cfcase value="xlarge">
-			<cfset var height = "24px" />
-		</cfcase>
-		<cfcase value="xxlarge">
-			<cfset var height = "28px" />
-		</cfcase>
-		<cfcase value="xxxlarge">
+		<cfcase value="double">
 			<cfset var height = "32px" />
-		</cfcase>
-		<cfcase value="xxxxlarge">
-			<cfset var height = "36px" />
 		</cfcase>
 		<cfdefaultcase>
 			<cfif isNumeric( arguments.size )>
@@ -86,23 +65,23 @@
 		</cfdefaultcase>
 	</cfswitch>
 
-	<core:Styles variable="tableStyle">
+	<cfmodule template="./Styles.cfm" variable="tableStyle">
 		height: #height# ;
 		Margin: 0 ; <!--- For Outlook. --->
 		margin: 0px ;
-	</core:Styles>
-	<core:Styles variable="tdStyle">
+	</cfmodule>
+	<cfmodule template="./Styles.cfm" variable="tdStyle">
 		font-family: arial, verdana, helvetica, sans-serif ;
 		font-size: #height# ;
 		height: #height# ;
 		line-height: 70% ; <!--- Using a smaller line-height for Outlook. --->
 		mso-line-height-rule: exactly ; <!--- For Outlook. --->
 		overflow: hidden ;
-	</core:Styles>
-	<core:Styles variable="divStyle">
+	</cfmodule>
+	<cfmodule template="./Styles.cfm" variable="divStyle">
 		height: #height# ;
 		overflow: hidden ;
-	</core:Styles>
+	</cfmodule>
 
 	<!---
 		CAUTION: We are using raw HTML elements here instead of the "html" custom tags

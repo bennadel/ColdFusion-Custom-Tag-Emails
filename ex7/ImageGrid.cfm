@@ -29,7 +29,7 @@
 
 			<core:IfDesktopView>
 
-				<html:table width="100%" margins="none small">
+				<html:table width="100%">
 				<html:tr>
 					<html:td align="center" class="html-entity-line-height-reset">
 						#slots.images[ 1 ]#
@@ -59,7 +59,7 @@
 					}
 				</core:MaxWidthStyles>
 
-				<html:table width="100%" margins="none small" class="ex7-image-grid">
+				<html:table width="100%" class="ex7-image-grid">
 				<html:tr>
 					<html:td align="center img-line-height-reset">
 						#slots.images[ 1 ]#

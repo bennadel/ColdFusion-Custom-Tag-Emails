@@ -1,7 +1,4 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.maxWidth" type="numeric" default="0" />
 
@@ -26,16 +23,16 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<core:Styles variable="tableStyles">
+			<cfmodule template="./Styles.cfm" variable="tableStyles">
 				display: none ;
 				height: 0px ;
 				mso-hide: all ;
 				overflow: hidden ;
 				visibility: hidden ;
 				width: 0px ;
-			</core:Styles>
+			</cfmodule>
 
-			<core:MaxWidthStyles width="#attributes.maxWidth#">
+			<cfmodule template="./MaxWidthStyles.cfm" width="#attributes.maxWidth#">
 				.email-if-mobile-view-wrapper {
 					display: block ;
 					display: table ;
@@ -44,9 +41,9 @@
 					visibility: visible ;
 					width: 100% ;
 				}
-			</core:MaxWidthStyles>
+			</cfmodule>
 
-			<core:IfNotMso>
+			<cfmodule template="./IfNotMso.cfm">
 
 				<!---
 					CAUTION: We are using raw HTML elements here instead of the "html"
@@ -61,7 +58,7 @@
 				</tr>
 				</table>
 
-			</core:IfNotMso>
+			</cfmodule>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

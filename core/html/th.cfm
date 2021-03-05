@@ -1,7 +1,4 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="../" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.align" type="string" default="left" />
 <cfparam name="attributes.bgcolor" type="string" default="" />
@@ -19,12 +16,13 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<core:Styles
+			<cfmodule
+				template="../Styles.cfm"
 				variable="inlineStyle"
 				entityName="th"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-			</core:Styles>
+			</cfmodule>
 
 			<!---
 				If no bgcolor was passed in, we want to look at the calculated styles to

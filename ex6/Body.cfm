@@ -126,7 +126,7 @@
 			</core:DarkModeStyles>
 
 
-			<html:table width="#theme.width#" class="e6-body">
+			<html:table width="#theme.width#" align="center" class="e6-body">
 			<html:tr>
 				<html:td colspan="3" class="e6-body-top-border">
 					<br />

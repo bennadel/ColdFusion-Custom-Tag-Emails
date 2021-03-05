@@ -44,7 +44,7 @@
 					NOTE: Cellpadding needed for older email clients.
 				--->
 				<html:a href="#attributes.href#" decoration="false" style="#outerLinkStyle#">
-					<html:table cellpadding="16" margins="none">
+					<html:table align="center" cellpadding="16" margins="none">
 					<html:tr>
 						<html:td style="#wrapperStyle#">
 							<html:a href="#attributes.href#"  decoration="false" style="#innerLinkStyle#">

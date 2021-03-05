@@ -86,7 +86,7 @@
 			</core:MaxWidthStyles>
 
 
-			<html:table width="#theme.width#" class="e7-body">
+			<html:table width="#theme.width#" align="center" class="e7-body">
 			<html:tr>
 				<html:td colspan="3" class="e7-body-top-border">
 					<br />

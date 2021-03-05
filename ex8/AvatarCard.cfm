@@ -56,7 +56,7 @@
 				</html:td>
 				<html:td valign="center" class="info">
 
-					<html:h4 margins="none xxxsmall" class="name">
+					<html:h4 margins="none quarter" class="name">
 						#slots.name#
 					</html:h4>
 

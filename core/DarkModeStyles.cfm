@@ -1,7 +1,4 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.injectImportant" type="boolean" default="true" />
 <cfparam name="attributes.runOnce" type="boolean" default="true" />
@@ -16,13 +13,14 @@
 			<cfset theme = getBaseTagData( "cf_email" ).theme />
 			<cfset theme.enableDarkModeSupport = true />
 
-			<core:MediaQueryStyles
+			<cfmodule
+				template="./MediaQueryStyles.cfm"
 				name="prefers-color-scheme"
 				value="dark"
 				injectImportant="#attributes.injectImportant#"
 				runOnce="#attributes.runOnce#">
 				#thistag.generatedContent#
-			</core:MediaQueryStyles>
+			</cfmodule>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

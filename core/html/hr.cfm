@@ -1,10 +1,10 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="../" />
+<!--- Get default margins for entity. --->
+<cfset entityMargins = getBaseTagData( "cf_email" ).providers[ "margins.hr" ] />
 
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.margins" type="string" default="small normal" />
+<cfparam name="attributes.margins" type="string" default="#entityMargins#" />
 <cfparam name="attributes.style" type="string" default="" />
 
 <!--- // ------------------------------------------------------------------------- // --->
@@ -14,14 +14,15 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<core:Styles
+			<cfmodule
+				template="../Styles.cfm"
 				variable="inlineStyle"
 				entityName="hr"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-			</core:Styles>
+			</cfmodule>
 
-			<core:BlockMargins margins="#attributes.margins#">
+			<cfmodule template="../BlockMargins.cfm" margins="#attributes.margins#">
 
 				<div
 					aria-hidden="true"
@@ -30,7 +31,7 @@
 					&nbsp;<br />
 				</div>
 
-			</core:BlockMargins>
+			</cfmodule>
 
 			<!--- Make sure this tag has NO BODY. --->
 			<cfexit method="exitTag" />

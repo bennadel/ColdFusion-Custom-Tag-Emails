@@ -5,9 +5,6 @@
 	the output in a custom tag that will trim the output.
 ---><cfmodule template="../TrimOutput.cfm">
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="../" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.class" type="string" default="" />
 <cfparam name="attributes.style" type="string" default="" />
@@ -19,12 +16,13 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<core:Styles
+			<cfmodule
+				template="../Styles.cfm"
 				variable="inlineStyle"
 				entityName="em"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-			</core:Styles>
+			</cfmodule>
 
 			<em
 				class="#trim( '#attributes.class#' )#"

@@ -10,6 +10,11 @@
 <core:Email
 	subject="Encapsulation techniques"
 	teaser="Exposing APIs and hiding complexity!">
+
+	<!--- Setup default block-margins for a few of the HTML entities. --->
+	<core:Provide name="margins.h2" value="half normal" />
+	<core:Provide name="margins.hr" value="normal 20" />
+
 	<core:Body>
 
 		<html:h1>

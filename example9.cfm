@@ -43,7 +43,7 @@
 				userAvatarUrl="https://bennadel-cdn.com/images/global/ben-nadel-avatar.jpg"
 				commentCreatedAt="2021-02-12 06:45:29"
 				commentText="I tried to play with the contrast a bit, but it's stil not perfect. That said, I think it's good enough for now. Agreed?"
-				margins="xxlarge none"
+				margins="normal none"
 			/>
 		</ex9:CommentCallout>
 
@@ -56,7 +56,7 @@
 			or just reply to this email
 		</html:p>
 
-		<html:hr />
+		<html:hr margins="normal double" />
 
 		<html:h2>
 			Re: Ben and Joel

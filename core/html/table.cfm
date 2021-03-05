@@ -1,14 +1,14 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="../" />
+<!--- Get default margins for entity. --->
+<cfset entityMargins = getBaseTagData( "cf_email" ).providers[ "margins.table" ] />
 
 <!--- Define custom tag attributes. --->
-<cfparam name="attributes.align" type="string" default="center" />
+<cfparam name="attributes.align" type="string" default="" />
 <cfparam name="attributes.border" type="string" default="0" />
 <cfparam name="attributes.cellspacing" type="string" default="0" />
 <cfparam name="attributes.cellpadding" type="string" default="0" />
 <cfparam name="attributes.class" type="string" default="" />
-<cfparam name="attributes.margins" type="string" default="none normal" />
+<cfparam name="attributes.margins" type="string" default="#entityMargins#" />
 <cfparam name="attributes.presentation" type="boolean" default="true" />
 <cfparam name="attributes.style" type="string" default="" />
 <cfparam name="attributes.width" type="string" default="" />
@@ -20,20 +20,23 @@
 	<cfcase value="end">
 		<cfoutput>
 
-			<core:Styles
+			<cfmodule
+				template="../Styles.cfm"
 				variable="inlineStyle"
 				entityName="table"
 				entityClass="#attributes.class#"
 				entityStyle="#attributes.style#">
-			</core:Styles>
+			</cfmodule>
 
-			<core:BlockMargins margins="#attributes.margins#">
+			<cfmodule template="../BlockMargins.cfm" margins="#attributes.margins#">
 
 				<table
 					<cfif len( attributes.width )>
 						width="#attributes.width#"
 					</cfif>
-					align="#attributes.align#"
+					<cfif len( attributes.align )>
+						align="#attributes.align#"
+					</cfif>
 					border="#attributes.border#"
 					cellspacing="#attributes.cellspacing#"
 					cellpadding="#attributes.cellpadding#"
@@ -45,7 +48,7 @@
 					#thistag.generatedContent#
 				</table>
 
-			</core:BlockMargins>
+			</cfmodule>
 
 			<!--- Reset the generated content since we're overriding the output. --->
 			<cfset thistag.generatedContent = "" />

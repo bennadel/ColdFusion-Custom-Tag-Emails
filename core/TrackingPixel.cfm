@@ -1,7 +1,4 @@
 
-<!--- Import custom tag libraries. --->
-<cfimport prefix="core" taglib="./" />
-
 <!--- Define custom tag attributes. --->
 <cfparam name="attributes.src" type="string" />
 <cfparam name="attributes.alt" type="string" default="This pixel helps us understand our customer's consumption of email content." />
@@ -13,19 +10,19 @@
 	<cfcase value="start">
 		<cfoutput>
 
-			<core:Styles variable="paragraphStyle">
+			<cfmodule template="./Styles.cfm" variable="paragraphStyle">
 				font-size: 1px ;
 				height: 1px ;
 				line-height: 1px ;
 				mso-line-height-rule: exactly ;
 				overflow: hidden ;
-			</core:Styles>
-			<core:Styles variable="imageStyle">
+			</cfmodule>
+			<cfmodule template="./Styles.cfm" variable="imageStyle">
 				height: 1px ;
 				width: 1px ;
-			</core:Styles>
+			</cfmodule>
 			<!--- Trying to make sure that the email client doesn't mess with this. --->
-			<core:MaxWidthStyles>
+			<cfmodule template="./MaxWidthStyles.cfm">
 				.email-tracking-pixel {
 					font-size: 1px ;
 					height: 1px ;
@@ -38,7 +35,7 @@
 					height: 1px ;
 					width: 1px ;
 				}
-			</core:MaxWidthStyles>
+			</cfmodule>
 
 			<!---
 				CAUTION: We are using raw HTML elements here instead of the "html"

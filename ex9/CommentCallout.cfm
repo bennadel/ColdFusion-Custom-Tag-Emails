@@ -35,7 +35,7 @@
 			</core:HtmlEntityTheme>
 
 			<!--- NOTE: Cellpadding needed for older email clients. --->
-			<html:table width="100%" cellpadding="8" margins="none xxxlarge" class="comment-callout">
+			<html:table width="100%" cellpadding="8" margins="none double" class="comment-callout">
 			<html:tr>
 				<html:td class="comment-callout-body html-entity-line-height-reset">
 
