@@ -2,7 +2,7 @@
 <cfswitch expression="#thistag.executionMode#">
 	<cfcase value="start">
 
-		<!--[if !mso]><!-->
+		<!--[if (!mso)&(!IE)]><!-->
 
 	</cfcase>
 	<cfcase value="end">

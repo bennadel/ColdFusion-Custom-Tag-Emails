@@ -23,7 +23,7 @@
 			<core:HtmlEntityTheme entity="span" class="arrow">
 				color: #theme.light.primary# ;
 				font-family: helvetica, arial, sans-serif ;
-				font-weight: 800 ;
+				font-weight: 700 ;
 			</core:HtmlEntityTheme>
 			<core:HtmlEntityTheme entity="strong">
 				color: #theme.light.primary# ;

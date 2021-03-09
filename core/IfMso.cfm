@@ -14,9 +14,9 @@
 		<cfoutput>
 
 			<cfif len( attributes.gteVersion )>
-				<!--[if gte mso #attributes.gteVersion#]>
+				<!--[if (gte mso #attributes.gteVersion#)|(IE)]>
 			<cfelse>
-				<!--[if mso]>
+				<!--[if (mso)|(IE)]>
 			</cfif>
 
 		</cfoutput>

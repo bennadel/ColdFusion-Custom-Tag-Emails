@@ -397,6 +397,9 @@
 				</head>
 
 				<cfmodule template="./Styles.cfm" variable="bodyStyle">
+					font-smoothing: antialiased ;
+						-moz-osx-font-smoothing: grayscale ;
+						-webkit-font-smoothing: antialiased ;
 					Margin: 0 ; <!--- For Outlook. --->
 					margin: 0px ;
 					padding: 0px ;

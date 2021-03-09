@@ -30,7 +30,7 @@
 					<style type="text/css">
 						h1, h2, h3, h4, h5, th {
 							font-family: helvetica, arial, sans-serif !important ;
-							font-weight: 800 !important ;
+							font-weight: 700 !important ;
 						}
 						blockquote, body, img, li, p, td {
 							font-family: helvetica, arial, sans-serif !important ;
