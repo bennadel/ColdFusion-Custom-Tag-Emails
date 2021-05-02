@@ -32,7 +32,7 @@
 
 			<a
 				href="#attributes.href#"
-				target="attributes.target"
+				target="#attributes.target#"
 				class="#trim( 'html-entity-a #attributes.class#' )#"
 				style="#inlineStyle#"
 				>#thistag.generatedContent#</a>

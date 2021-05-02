@@ -281,12 +281,7 @@
 				// tags that don't actually expose any state. As such, we have to omit
 				// these internal tags from the list otherwise our getBaseTagData() calls
 				// will blow-up.
-				return(
-					( arguments.tagName != "cfmodule" ) &&
-					( arguments.tagName != "cfsavecontent" ) &&
-					( arguments.tagName != "cfsilent" ) &&
-					( arguments.tagName != "cftimer" )
-				);
+				return( arguments.tagName.reFindNoCase( "^cf_" ) );
 
 			}
 		);
