@@ -74,14 +74,10 @@
 			// tags that don't actually expose any state. As such, we have to omit
 			// these internal tags from the list otherwise our getBaseTagData() calls
 			// will blow-up.
-			if (
-				( tagName != "cfmodule" ) &&
-				( tagName != "cfsavecontent" ) &&
-				( tagName != "cfsilent" ) &&
-				( tagName != "cftimer" )
-				) {
+			if ( reFindNoCase( "^cf_", tagName ) ) {
 
 				return( tagName );
+
 			}
 
 		}
