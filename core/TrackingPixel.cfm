@@ -44,7 +44,7 @@
 			--->
 			<p aria-hidden="true" class="email-tracking-pixel" style="#paragraphStyle#">
 				<img
-					src="#encodeForHtmlAttribute( attributes.src )#"
+					src="#fixProtocol( encodeForHtmlAttribute( attributes.src ) )#"
 					width="1"
 					height="1"
 					alt="#encodeForHtmlAttribute( attributes.alt )#"
@@ -59,3 +59,34 @@
 		</cfoutput>
 	</cfcase>
 </cfswitch>
+
+<!--- // ------------------------------------------------------------------------- // --->
+<!--- // ------------------------------------------------------------------------- // --->
+
+<cfscript>
+
+	/**
+	* I unencode the protocol contained within the given attribute. Some email clients,
+	* like Yahoo! Mail, will strip-out the HREF attribute if it contains an encoded
+	* protocol. As a measure of abundant caution, I am therefore applying the same fixing
+	* logic to the SRC attributes (which also contain URLs).
+	* 
+	* @encodedAttribute I am the SRC value being "fixed".
+	*/
+	public string function fixProtocol( required string encodedAttribute ) {
+
+		var unencodedSuffix = "://";
+		var encodedSuffix = encodeForHtmlAttribute( unencodedSuffix );
+
+		return(
+			reReplaceNoCase(
+				arguments.encodedAttribute,
+				"^([a-z0-9]+)#encodedSuffix#",
+				"\1#unencodedSuffix#",
+				"one"
+			)
+		);
+
+	}
+
+</cfscript>

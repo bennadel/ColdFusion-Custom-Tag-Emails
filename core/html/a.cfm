@@ -31,7 +31,7 @@
 			</cfmodule>
 
 			<a
-				href="#attributes.href#"
+				href="#fixProtocol( attributes.href )#"
 				target="#attributes.target#"
 				class="#trim( 'html-entity-a #attributes.class#' )#"
 				style="#inlineStyle#"
@@ -46,3 +46,33 @@
 
 <!--- End of fanatical whitespace management. --->
 </cfmodule><cfexit method="exitTemplate" />
+
+<!--- // ------------------------------------------------------------------------- // --->
+<!--- // ------------------------------------------------------------------------- // --->
+
+<cfscript>
+
+	/**
+	* I unencode the protocol contained within the given attribute. Some email clients,
+	* like Yahoo! Mail, will strip-out the HREF attribute if it contains an encoded
+	* protocol.
+	* 
+	* @encodedAttribute I am the HREF value being "fixed".
+	*/
+	public string function fixProtocol( required string encodedAttribute ) {
+
+		var unencodedSuffix = "://";
+		var encodedSuffix = encodeForHtmlAttribute( unencodedSuffix );
+
+		return(
+			reReplaceNoCase(
+				arguments.encodedAttribute,
+				"^([a-z0-9]+)#encodedSuffix#",
+				"\1#unencodedSuffix#",
+				"one"
+			)
+		);
+
+	}
+
+</cfscript>
